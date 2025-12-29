@@ -89,8 +89,12 @@ export default class CoreLoginSitePage implements OnInit {
      * @inheritdoc
      */
     async ngOnInit(): Promise<void> {
-        let url = '';
-        this.siteSelector = CoreConstants.CONFIG.multisitesdisplay;
+        // Hardcoded URL - always connect to eduvestra.com
+        const url = 'https://eduvestra.com';
+
+        this.siteSelector = 'list';
+        this.showScanQR = false;
+        this.showKeyboard = false;
 
         const siteFinderSettings: Partial<CoreLoginSiteFinderSettings> = CoreConstants.CONFIG.sitefindersettings || {};
         this.siteFinderSettings = {
@@ -103,54 +107,13 @@ export default class CoreLoginSitePage implements OnInit {
             ...siteFinderSettings,
         };
 
-        // Load fixed sites if they're set.
-        const sites = await CoreLoginHelper.getAvailableSites();
-
-        if (sites.length) {
-            url = await this.initSiteSelector();
-        } else {
-            url = await this.consumeInstallReferrerUrl() ?? '';
-
-            const showOnboarding = CoreConstants.CONFIG.enableonboarding && !CorePlatform.isIOS();
-
-            if (url) {
-                this.connect(url);
-
-                if (showOnboarding) {
-                    // Don't display onboarding in this case, and don't display it again later.
-                    CoreConfig.set(ONBOARDING_DONE, 1);
-                }
-            } else if (showOnboarding) {
-                this.initOnboarding();
-            }
-        }
-
-        this.showScanQR = CoreLoginHelper.displayQRInSiteScreen();
-
+        // Initialize form (required for component compatibility)
         this.siteForm = this.formBuilder.group({
             siteUrl: [url, this.moodleUrlValidator()],
         });
 
-        this.searchFunction = CoreUtils.debounce(async (search: string) => {
-            search = search.trim();
-
-            if (search.length >= 3) {
-                // Update the sites list.
-                const sites = await CoreSites.findSites(search);
-
-                // Add UI tweaks.
-                this.sites = this.extendCoreLoginSiteInfo(<CoreLoginSiteInfoExtended[]> sites);
-
-                this.hasSites = !!this.sites.length;
-            } else {
-                // Not reseting the array to allow animation to be displayed.
-                this.hasSites = false;
-            }
-
-            this.loadingSites = false;
-        }, 1000);
-
-        this.showKeyboard = !!CoreNavigator.getRouteBooleanParam('showKeyboard');
+        // Automatically connect to the hardcoded URL
+        this.connect(url);
     }
 
     /**

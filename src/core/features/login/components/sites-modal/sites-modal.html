@@ -42,10 +42,5 @@
             </ng-template>
         </core-sites-list>
     </core-loading>
-    <ion-fab slot="fixed" core-fab vertical="bottom" horizontal="end">
-        <ion-fab-button (click)="add($event)" [attr.aria-label]="'core.login.add' | translate">
-            <ion-icon name="fas-plus" aria-hidden="true" />
-            <span class="sr-only">{{ 'core.login.add' | translate }}</span>
-        </ion-fab-button>
-    </ion-fab>
+    <!-- Add site button removed - hardcoded to eduvestra.com only -->
 </ion-content>

@@ -36,7 +36,6 @@ import { CorePushNotifications } from '@features/pushnotifications/services/push
 import { CorePath } from '@singletons/path';
 import { CorePromisedValue } from '@classes/promised-value';
 import { SafeHtml } from '@angular/platform-browser';
-import { CoreSettingsHelper } from '@features/settings/services/settings-helper';
 import {
     CoreSiteIdentityProvider,
     CoreSitePublicConfigResponse,
@@ -289,13 +288,17 @@ export class CoreLoginHelperProvider {
 
     /**
      * Get Available sites (includes staging sites if are enabled). It doesn't include demo mode site.
+     * Hardcoded to always return eduvestra.com
      *
      * @returns Available sites.
      */
     async getAvailableSites(): Promise<CoreLoginSiteInfo[]> {
-        const hasEnabledStagingSites = await CoreSettingsHelper.hasEnabledStagingSites();
-
-        return CoreConstants.CONFIG.sites.filter(site => (!site.staging || hasEnabledStagingSites) && !site.demoMode);
+        // Always return the hardcoded eduvestra.com site
+        return [{
+            url: 'https://eduvestra.com',
+            name: 'Eduvestra',
+            imageurl: '',
+        }];
     }
 
     /**

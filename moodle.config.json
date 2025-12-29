@@ -60,6 +60,7 @@
         "sv": "Svenska",
         "szl": "Ślōnski",
         "tg": "Тоҷикӣ",
+        "tk": "Türkmençe",
         "tr": "Türkçe",
         "uk": "Українська",
         "uz": "O'zbekcha",
@@ -87,7 +88,13 @@
         "high": 120
     },
     "customurlscheme": "moodlemobile",
-    "sites": [],
+    "sites": [
+        {
+            "url": "https://eduvestra.com",
+            "name": "Eduvestra",
+            "imageurl": ""
+        }
+    ],
     "multisitesdisplay": "",
     "sitefindersettings": {},
     "onlyallowlistedsites": false,
