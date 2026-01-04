@@ -35,7 +35,12 @@ const modulesRoutes: WeakMap<InjectionToken<unknown>, ModuleRoutes> = new WeakMa
  * @returns App routes.
  */
 function buildAppRoutes(injector: Injector): Routes {
-    return injector.get<Routes[]>(APP_ROUTES, []).flat();
+    const routes = injector.get<Routes[]>(APP_ROUTES, []);
+    console.log('DEBUG: buildAppRoutes, raw routes:', routes);
+    const flatRoutes = routes.flat();
+    console.log('DEBUG: buildAppRoutes, flat routes:', flatRoutes);
+
+    return flatRoutes;
 }
 
 /**
@@ -239,14 +244,18 @@ export const APP_ROUTES = new InjectionToken('APP_ROUTES');
  * Module used to register routes at the root of the application.
  */
 @NgModule({
-    imports: [
-        RouterModule.forRoot([]),
-    ],
-    providers: [
-        { provide: ROUTES, multi: true, useFactory: buildAppRoutes, deps: [Injector] },
-    ],
+    imports: [RouterModule],
 })
 export class AppRoutingModule {
+
+    static forRoot(): ModuleWithProviders<AppRoutingModule> {
+        return {
+            ngModule: AppRoutingModule,
+            providers: [
+                { provide: ROUTES, multi: true, useFactory: buildAppRoutes, deps: [Injector] },
+            ],
+        };
+    }
 
     static forChild(routes: Routes): ModuleWithProviders<AppRoutingModule> {
         return {

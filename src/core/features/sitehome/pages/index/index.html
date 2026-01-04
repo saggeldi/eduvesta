@@ -10,8 +10,28 @@
         <ion-refresher-content pullingText="{{ 'core.pulltorefresh' | translate }}" />
     </ion-refresher>
     <core-loading [hideUntil]="dataLoaded" placeholderType="column" placeholderHeight="48px">
-        <ion-list class="list-item-limited-width">
-            <!-- Site home main contents. -->
+
+        <!-- EduVestra Hero Section -->
+        <div class="eduvestra-hero">
+            <div class="hero-content">
+                <ion-label>
+                    <h1>Modern Learning</h1>
+                    <h2>EduVestra Digital School</h2>
+                    <p>Safe, Accessible, and Fun Learning for Every Child</p>
+                </ion-label>
+                <div class="hero-actions">
+                    <ion-button color="light" fill="solid" (click)="openAvailableCourses()">
+                        Explore Courses
+                    </ion-button>
+                </div>
+            </div>
+            <div class="hero-decoration">
+                <!-- Abstract circle or illustration could go here -->
+            </div>
+        </div>
+
+        <div class="home-content-container">
+            <!-- Site home main contents (Sections/Modules) -->
             @if (section && section.hasContent) {
                 <section class="core-course-module-list-wrapper">
                     @if (section.name || section.visible === 0 || section.availabilityinfo) {
@@ -67,30 +87,32 @@
                 </section>
             }
 
-            <!-- Site home items: news, categories, courses, etc. -->
-            @if (items.length > 0) {
-
-                @for (item of items; track item) {
-                    @switch (item) {
-                        @case ('LIST_OF_COURSE') {
-                            <ng-template *ngTemplateOutlet="allCourseList" />
-                        }
-                        @case ('LIST_OF_CATEGORIES') {
-                            <ng-template *ngTemplateOutlet="categories" />
-                        }
-                        @case ('COURSE_SEARCH_BOX') {
-                            <ng-template *ngTemplateOutlet="courseSearch" />
-                        }
-                        @case ('ENROLLED_COURSES') {
-                            <ng-template *ngTemplateOutlet="enrolledCourseList" />
-                        }
-                        @case ('NEWS_ITEMS') {
-                            <ng-template *ngTemplateOutlet="news" />
+            <!-- Quick Access Grid -->
+            <div class="quick-access-grid">
+                @if (items.length > 0) {
+                    @for (item of items; track item) {
+                        @switch (item) {
+                            @case ('LIST_OF_COURSE') {
+                                <ng-template *ngTemplateOutlet="allCourseList" />
+                            }
+                            @case ('LIST_OF_CATEGORIES') {
+                                <ng-template *ngTemplateOutlet="categories" />
+                            }
+                            @case ('COURSE_SEARCH_BOX') {
+                                <ng-template *ngTemplateOutlet="courseSearch" />
+                            }
+                            @case ('ENROLLED_COURSES') {
+                                <ng-template *ngTemplateOutlet="enrolledCourseList" />
+                            }
+                            @case ('NEWS_ITEMS') {
+                                <ng-template *ngTemplateOutlet="news" />
+                            }
                         }
                     }
                 }
-            }
-        </ion-list>
+            </div>
+        </div>
+
         @if (hasBlocks) {
             <core-block-side-blocks-button slot="fixed" contextLevel="course" [instanceId]="siteHomeId" />
         }
@@ -101,52 +123,61 @@
     </core-loading>
 </ion-content>
 
+<!-- Templates modified for Grid Layout -->
+
 <ng-template #allCourseList>
-    <ion-card>
-        <ion-item button class="ion-text-wrap" (click)="openAvailableCourses()">
-            <ion-icon name="fas-graduation-cap" fixed-width slot="start" aria-hidden="true" />
-            <ion-label>
-                <p class="item-heading">{{ 'core.courses.availablecourses' | translate}}</p>
-            </ion-label>
-        </ion-item>
+    <ion-card class="dashboard-card card-blue" button (click)="openAvailableCourses()">
+        <div class="card-icon-wrapper">
+            <ion-icon name="fas-graduation-cap" aria-hidden="true" />
+        </div>
+        <ion-card-header>
+            <ion-card-title>{{ 'core.courses.availablecourses' | translate}}</ion-card-title>
+            <ion-card-subtitle>{{ 'core.view' | translate }}</ion-card-subtitle>
+        </ion-card-header>
     </ion-card>
 </ng-template>
 
 <ng-template #news>
     @if (newsForumModule) {
-        <core-course-module class="core-sitehome-news" [module]="newsForumModule" />
+        <div class="full-width-item">
+            <h3 class="section-title">Latest News</h3>
+             <core-course-module class="core-sitehome-news" [module]="newsForumModule" />
+        </div>
     }
 </ng-template>
 
 <ng-template #categories>
-    <ion-card>
-        <ion-item button class="ion-text-wrap" (click)="openCourseCategories()">
-            <ion-icon name="far-folder" slot="start" aria-hidden="true" />
-            <ion-label>
-                <p class="item-heading">{{ 'core.courses.categories' | translate}}</p>
-            </ion-label>
-        </ion-item>
+    <ion-card class="dashboard-card card-purple" button (click)="openCourseCategories()">
+        <div class="card-icon-wrapper">
+            <ion-icon name="far-folder" aria-hidden="true" />
+        </div>
+         <ion-card-header>
+            <ion-card-title>{{ 'core.courses.categories' | translate}}</ion-card-title>
+             <ion-card-subtitle>{{ 'core.explore' | translate }}</ion-card-subtitle>
+        </ion-card-header>
     </ion-card>
 </ng-template>
 
 <ng-template #enrolledCourseList>
-    <ion-card>
-        <ion-item button class="ion-text-wrap" (click)="openMyCourses()">
-            <ion-icon name="fas-graduation-cap" fixed-width slot="start" aria-hidden="true" />
-            <ion-label>
-                <p class="item-heading">{{ 'core.courses.mycourses' | translate}}</p>
-            </ion-label>
-        </ion-item>
+    <ion-card class="dashboard-card card-teal" button (click)="openMyCourses()">
+        <div class="card-icon-wrapper">
+            <ion-icon name="fas-book-open" aria-hidden="true" />
+        </div>
+        <ion-card-header>
+            <ion-card-title>{{ 'core.courses.mycourses' | translate}}</ion-card-title>
+            <ion-card-subtitle>{{ 'core.continue' | translate }}</ion-card-subtitle>
+        </ion-card-header>
     </ion-card>
 </ng-template>
 
 <ng-template #courseSearch>
-    <ion-card>
-        <ion-item button class="ion-text-wrap" (click)="openSearch()">
-            <ion-icon name="fas-magnifying-glass" slot="start" aria-hidden="true" />
-            <ion-label>
-                <p class="item-heading">{{ 'core.courses.searchcourses' | translate}}</p>
-            </ion-label>
-        </ion-item>
+    <ion-card class="dashboard-card card-orange" button (click)="openSearch()">
+        <div class="card-icon-wrapper">
+             <ion-icon name="fas-magnifying-glass" aria-hidden="true" />
+        </div>
+        <ion-card-header>
+            <ion-card-title>{{ 'core.courses.searchcourses' | translate}}</ion-card-title>
+             <ion-card-subtitle>{{ 'core.find' | translate }}</ion-card-subtitle>
+        </ion-card-header>
     </ion-card>
 </ng-template>

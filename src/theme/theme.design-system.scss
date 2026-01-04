@@ -4,7 +4,7 @@
 
 :root {
     // Add serif fallback font for km language in some devices.
-    --ion-font-family: var(--ion-default-font), serif;
+    --ion-font-family: 'Inter', sans-serif, serif; // Updated to Inter
 
     // Variables in the design system should be named using the following pattern:
     // SYSTEM-CATEGORY-CONCEPT-PROPERTY-VARIANT (where the only required part is SYSTEM)
@@ -29,6 +29,7 @@
 
     --mdl-typography-fontWeight-normal: 400;
     --mdl-typography-fontWeight-medium: 500;
+    --mdl-typography-fontWeight-bold: 600; // Added bold weight
 
     --mdl-typography-monospace-font: Andale Mono,Monaco,Courier New,DejaVu Sans Mono,monospace;
 
@@ -39,7 +40,7 @@
 
     --mdl-typography-body-fontWeight: var(--mdl-typography-fontWeight-normal);
     --mdl-typography-body-lineHeight: 150%;
-    --mdl-typography-body-letterSpacing: 0.5px;
+    --mdl-typography-body-letterSpacing: 0.2px; // Reduced letter spacing for Inter
     --mdl-typography-body-paragraphSpacing: 150%;
 
     --mdl-typography-body-font-sm: normal normal var(--mdl-typography-body-fontWeight) var(--mdl-typography-body-fontSize-sm)/var(--mdl-typography-body-lineHeight) var(--ion-font-family);
@@ -51,9 +52,9 @@
     --mdl-typography-link-fontSize-md: var(--mdl-typography-fontSize-md);
     --mdl-typography-link-fontSize-lg: var(--mdl-typography-fontSize-lg);
 
-    --mdl-typography-link-fontWeight: var(--mdl-typography-fontWeight-normal);
+    --mdl-typography-link-fontWeight: var(--mdl-typography-fontWeight-medium); // Bolder links
     --mdl-typography-link-lineHeight: 150%;
-    --mdl-typography-link-letterSpacing: 0.5px;
+    --mdl-typography-link-letterSpacing: 0.2px;
     --mdl-typography-link-paragraphSpacing: 150%;
 
     --mdl-typography-link-font-sm: normal normal var(--mdl-typography-link-fontWeight) var(--mdl-typography-link-fontSize-sm)/var(--mdl-typography-link-lineHeight) var(--ion-font-family);
@@ -98,9 +99,9 @@
     --mdl-typography-heading5-fontSize: #{dynamic-font(18px)}; // 1.125rem
     --mdl-typography-heading6-fontSize: #{dynamic-font(16px)}; // 1rem
 
-    --mdl-typography-heading1-fontWeight: var(--mdl-typography-fontWeight-normal);
-    --mdl-typography-heading2-fontWeight: var(--mdl-typography-fontWeight-normal);
-    --mdl-typography-heading3-fontWeight: var(--mdl-typography-fontWeight-normal);
+    --mdl-typography-heading1-fontWeight: var(--mdl-typography-fontWeight-bold); // Bolder headings
+    --mdl-typography-heading2-fontWeight: var(--mdl-typography-fontWeight-bold);
+    --mdl-typography-heading3-fontWeight: var(--mdl-typography-fontWeight-bold);
     --mdl-typography-heading4-fontWeight: var(--mdl-typography-fontWeight-medium);
     --mdl-typography-heading5-fontWeight: var(--mdl-typography-fontWeight-medium);
     --mdl-typography-heading6-fontWeight: var(--mdl-typography-fontWeight-medium);
@@ -121,26 +122,26 @@
 
     // ***** SHAPE category ***** //
     --mdl-shape-borderRadius-none: 0px;
-    --mdl-shape-borderRadius-xs: 4px;
-    --mdl-shape-borderRadius-sm: 8px;
-    --mdl-shape-borderRadius-md: 12px;
-    --mdl-shape-borderRadius-lg: 16px;
-    --mdl-shape-borderRadius-xl: 24px;
+    --mdl-shape-borderRadius-xs: 8px; // Increased
+    --mdl-shape-borderRadius-sm: 12px; // Increased
+    --mdl-shape-borderRadius-md: 16px; // Increased
+    --mdl-shape-borderRadius-lg: 20px; // Increased
+    --mdl-shape-borderRadius-xl: 32px; // Increased
     --mdl-shape-borderRadius-round: 50%;
 
-    // ***** SHADOW category ***** //
-    --mdl-shadow-boxShadowColor: 40 40 40; //#282828;
-    --mdl-shadow-boxShadow-00: 0px 0px 0px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%);
-    --mdl-shadow-boxShadow-outline: 0px 0px 0px 2px rgb(var(--mdl-shadow-boxShadowColor) / 15%), 0px 2px 4px 0px rgb(var(--mdl-shadow-boxShadowColor) / 2%);
-    --mdl-shadow-boxShadow-01: 0px 1px 3px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%), 0px 2px 1px 0px rgb(var(--mdl-shadow-boxShadowColor) / 12%), 0px 1px 1px 0px rgb(var(--mdl-shadow-boxShadowColor) / 14%);
-    --mdl-shadow-boxShadow-02: 0px 1px 5px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%), 0px 3px 1px 0px rgb(var(--mdl-shadow-boxShadowColor) / 12%), 0px 2px 2px 0px rgb(var(--mdl-shadow-boxShadowColor) / 14%);
-    --mdl-shadow-boxShadow-03: 0px 1px 8px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%), 0px 3px 3px 0px rgb(var(--mdl-shadow-boxShadowColor) / 12%), 0px 3px 4px 0px rgb(var(--mdl-shadow-boxShadowColor) / 14%);
-    --mdl-shadow-boxShadow-04: 0px 2px 4px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%), 0px 1px 10px 0px rgb(var(--mdl-shadow-boxShadowColor) / 12%), 0px 4px 5px 0px rgb(var(--mdl-shadow-boxShadowColor) / 14%);
-    --mdl-shadow-boxShadow-06: 0px 3px 5px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%), 0px 1px 18px 0px rgb(var(--mdl-shadow-boxShadowColor) / 12%), 0px 6px 10px 0px rgb(var(--mdl-shadow-boxShadowColor) / 14%);
-    --mdl-shadow-boxShadow-08: 0px 5px 5px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%), 0px 3px 14px 0px rgb(var(--mdl-shadow-boxShadowColor) / 12%), 0px 8px 10px 0px rgb(var(--mdl-shadow-boxShadowColor) / 14%);
-    --mdl-shadow-boxShadow-12: 0px 7px 8px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%),0px 5px 22px 0px rgb(var(--mdl-shadow-boxShadowColor) / 12%),0px 12px 17px 0px rgb(var(--mdl-shadow-boxShadowColor) / 14%);
-    --mdl-shadow-boxShadow-16: 0px 7px 8px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%),0px 5px 22px 0px rgb(var(--mdl-shadow-boxShadowColor) / 12%),0px 12px 17px 0px rgb(var(--mdl-shadow-boxShadowColor) / 14%);
-    --mdl-shadow-boxShadow-24: 0px 11px 15px 0px rgb(var(--mdl-shadow-boxShadowColor) / 20%), 0px 9px 46px 0px rgb(var(--mdl-shadow-boxShadowColor) / 12%), 0px 24px 38px 0px rgb(var(--mdl-shadow-boxShadowColor) / 14%);
+    // ***** SHADOW category - FLAT DESIGN ***** //
+    --mdl-shadow-boxShadowColor: 0 0 0;
+    --mdl-shadow-boxShadow-00: none;
+    --mdl-shadow-boxShadow-outline: 0px 0px 0px 1px var(--stroke); // Use border for outline
+    --mdl-shadow-boxShadow-01: none;
+    --mdl-shadow-boxShadow-02: none;
+    --mdl-shadow-boxShadow-03: none;
+    --mdl-shadow-boxShadow-04: none;
+    --mdl-shadow-boxShadow-06: none;
+    --mdl-shadow-boxShadow-08: none;
+    --mdl-shadow-boxShadow-12: none;
+    --mdl-shadow-boxShadow-16: none;
+    --mdl-shadow-boxShadow-24: none;
 
     // ***** OPACITY category ***** //
     --mdl-button-disabled-opacity: 0.6;

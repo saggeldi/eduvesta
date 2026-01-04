@@ -1,5 +1,165 @@
 @use "theme/helpers/helpers" as *;
 
+:host {
+    display: block;
+}
+
+// Hero Section
+.eduvestra-hero {
+    background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 100%);
+    color: white;
+    padding: 40px 24px 60px; // Extra bottom padding for overlap
+    margin-bottom: -30px; // Pull content up
+    text-align: center;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    position: relative;
+    overflow: hidden;
+
+    h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: -0.03em;
+    }
+    h2 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 5px 0 15px;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    p {
+        font-size: 0.95rem;
+        opacity: 0.8;
+        margin-bottom: 25px;
+    }
+
+    .hero-actions {
+        ion-button {
+            --border-radius: 50px;
+            --color: var(--ion-color-primary-shade);
+            font-weight: 700;
+        }
+    }
+}
+
+.home-content-container {
+    padding: 20px 16px;
+}
+
+// Grid Layout for Quick Access Items
+.quick-access-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-top: 10px;
+}
+
+// Full width items like News
+.full-width-item {
+    grid-column: 1 / -1;
+    margin-top: 20px;
+
+    .section-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 15px;
+        padding-left: 8px;
+    }
+}
+
+// Dashboard Cards (Colorful Tiles)
+.dashboard-card {
+    margin: 0; // Reset margin due to grid
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    min-height: 160px;
+    position: relative;
+    overflow: hidden;
+    border: none !important;
+
+    .card-icon-wrapper {
+        background: rgba(255, 255, 255, 0.2);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+        margin-top: 20px;
+
+        ion-icon {
+            font-size: 28px;
+            color: white;
+        }
+    }
+
+    ion-card-header {
+        padding: 0 16px 20px;
+
+        ion-card-title {
+            color: white !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 4px;
+        }
+        ion-card-subtitle {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-size: 0.75rem !important;
+        }
+    }
+
+    // Color Variants
+    &.card-blue {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        box-shadow: 0 10px 20px -5px rgba(79, 172, 254, 0.4);
+    }
+    &.card-purple {
+        background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+        box-shadow: 0 10px 20px -5px rgba(161, 140, 209, 0.4);
+    }
+    &.card-teal {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        box-shadow: 0 10px 20px -5px rgba(67, 233, 123, 0.4);
+    }
+    &.card-orange {
+         background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+         box-shadow: 0 10px 20px -5px rgba(250, 112, 154, 0.4);
+    }
+}
+
+// Module List Styles
+section.core-course-module-list-wrapper {
+    border: none;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    margin: 0 0 24px 0;
+    overflow: hidden;
+    padding-bottom: 10px;
+
+    ion-item-divider {
+        --background: transparent;
+        border-bottom: 1px solid var(--gray-200);
+        margin-bottom: 10px;
+
+        ion-label {
+             h2 {
+                 color: var(--ion-color-primary);
+                 font-weight: 700;
+             }
+        }
+    }
+}
+
+// Icon styling
 ion-item ion-icon {
     display: inline-block;
     border-radius: var(--mdl-shape-borderRadius-xs);
@@ -8,36 +168,4 @@ ion-item ion-icon {
     line-height: var(--size);
     --margin-end: 8px;
     @include margin-horizontal(null, var(--margin-end));
-}
-
-section.core-course-module-list-wrapper {
-    border: var(--ion-card-border-width) solid var(--ion-card-border-color);
-    border-radius: var(--ion-card-radius);
-    margin: 12px;
-
-    ion-card {
-        --ion-card-background: transparent;
-    }
-    ion-item {
-        --background: transparent;
-    }
-
-    ion-item-divider {
-        --background: transparent;
-    }
-}
-
-core-course-module.core-sitehome-news {
-    --card-border-width: var(--ion-card-border-width);
-    --card-radius: var(--ion-card-radius);
-    --activity-border: 1px solid var(--stroke);
-
-    ::ng-deep ion-card {
-        padding-top: 4px !important;
-        --card-padding-bottom: 4px;
-        --horizontal-spacing: 12px;
-        ion-item {
-            --padding-start: 16px;
-        }
-    }
 }

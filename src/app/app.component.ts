@@ -47,6 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit {
      * @inheritdoc
      */
     ngOnInit(): void {
+        console.log('DEBUG: AppComponent ngOnInit START');
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const win = <any> window;
 
@@ -130,12 +131,16 @@ export class AppComponent implements OnInit, AfterViewInit {
      */
     ngAfterViewInit(): void {
         this.logger.debug('App component initialized');
+        console.log('DEBUG: AppComponent ngAfterViewInit START');
 
         CoreSubscriptions.once(this.outlet().activateEvents, async () => {
+            console.log('DEBUG: Router ACTIVATE event received');
             await CorePlatform.ready();
+            console.log('DEBUG: CorePlatform ready');
 
             this.logger.debug('Hide splash screen');
             SplashScreen.hide();
+            console.log('DEBUG: Splash screen hidden');
             this.setSystemUIColorsAfterSplash();
         });
     }

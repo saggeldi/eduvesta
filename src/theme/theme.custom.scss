@@ -1,15 +1,288 @@
 /*
  * App CUSTOM theme SCSS
  * ----------------------------------------------------------------------------
- * Place here custom styles.
+ * Premium Education Theme - Eduvestra Style
  */
+
+// Mixin for clean transitions
+@mixin comfortable-transition() {
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
 
 /*
  * Light Theme
  * -------------------------------------------
  */
 :root {
+    /* Brand Colors - EduVestra */
+    --ion-color-primary: #2B6FFE;
+    --ion-color-primary-rgb: 43, 111, 254;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #2662e0;
+    --ion-color-primary-tint: #407dfe;
 
+    /* Secondary / Accent Colors (from website course categories) */
+    --ion-color-secondary: #00d2d3; // Cyan/Teal
+    --ion-color-tertiary: #54a0ff;  // Lighter Blue
+    --ion-color-success: #1dd1a1;
+    --ion-color-warning: #feca57;
+    --ion-color-danger: #ff6b6b;
+
+    /* Backgrounds */
+    --page-background: #F3F4F6; // Slightly cooler/cleaner gray
+    --ion-background-color: var(--page-background);
+    --surface-card: #FFFFFF;
+
+    /* Text Colors */
+    --text-primary: #1F2937;   // Gray 900
+    --text-secondary: #4B5563; // Gray 600
+    --text-tertiary: #9CA3AF;  // Gray 400
+
+    /* Shapes & Shadows */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px; /* More rounded for modern feel */
+    --radius-xl: 24px;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Login Page Overrides */
+    --core-login-background: var(--page-background);
+    --core-login-text-color: var(--text-primary);
+    --core-login-input-background: #FFFFFF;
+    --core-login-input-color: var(--text-primary);
+
+    /* Typography */
+    --ion-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    // -------------------------------------------------------------------------
+    // Component Styles
+    // -------------------------------------------------------------------------
+
+    // General Content
+    ion-content {
+        --background: var(--page-background);
+    }
+
+    // Button Overrides - Modern & Pill-like or Soft Rect
+    ion-button {
+        --border-radius: 50px; // Pill shape is very modern, or use var(--radius-md) for soft rect
+        --box-shadow: none;
+        --padding-start: 24px;
+        --padding-end: 24px;
+        --padding-top: 12px;
+        --padding-bottom: 12px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        text-transform: none;
+
+        &.button-solid {
+            --background: var(--ion-color-primary);
+            --color: white;
+            --box-shadow: var(--shadow-md);
+
+            &:hover {
+                --background: var(--ion-color-primary-tint);
+                --box-shadow: var(--shadow-lg);
+                transform: translateY(-1px);
+            }
+
+            &:active {
+                --background: var(--ion-color-primary-shade);
+                --box-shadow: var(--shadow-sm);
+                transform: translateY(0);
+            }
+        }
+
+        &.button-outline {
+            --border-width: 2px;
+            --border-color: var(--ion-color-primary);
+            --color: var(--ion-color-primary);
+            --background-hover: rgba(var(--ion-color-primary-rgb), 0.05);
+        }
+
+        &.button-clear {
+            --color: var(--text-secondary);
+            &:hover {
+                --color: var(--ion-color-primary);
+                --background: rgba(var(--ion-color-primary-rgb), 0.05);
+            }
+        }
+    }
+
+    // Card Overrides - Clean White Surface
+    ion-card {
+        --background: var(--surface-card);
+        --border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-card);
+        border: 1px solid rgba(0,0,0,0.02);
+        margin-inline: 16px;
+        margin-bottom: 24px;
+        overflow: hidden;
+        @include comfortable-transition();
+
+        &:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        ion-card-header {
+            padding: 24px 24px 12px 24px;
+
+            ion-card-title {
+                font-size: 1.35rem;
+                font-weight: 700;
+                color: var(--text-primary);
+                letter-spacing: -0.02em;
+            }
+
+            ion-card-subtitle {
+                font-size: 0.8rem;
+                font-weight: 700;
+                color: var(--ion-color-primary);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin-top: 4px;
+            }
+        }
+
+        ion-card-content {
+            padding: 0 24px 24px 24px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+    }
+
+    // Input Overrides - Boxed & Clean
+    ion-item {
+        --background: transparent;
+        --border-color: #E5E7EB;
+        --ripple-color: var(--ion-color-primary);
+
+        &.item-input {
+            --padding-start: 0;
+            --inner-padding-end: 0;
+            margin-bottom: 24px;
+
+            .item-inner {
+                border: 2px solid #E5E7EB;
+                border-radius: var(--radius-md);
+                background: white;
+                padding-inline: 16px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                transition: border-color 0.2s, box-shadow 0.2s;
+            }
+
+            --border-width: 0;
+            --highlight-height: 0;
+
+            &.item-has-focus .item-inner {
+                border-color: var(--ion-color-primary);
+                box-shadow: 0 0 0 4px rgba(var(--ion-color-primary-rgb), 0.1);
+            }
+        }
+
+        ion-label {
+            color: var(--text-secondary) !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+
+            &[position="floating"], &[position="stacked"] {
+                 transform: scale(1);
+                 margin-bottom: 8px;
+            }
+        }
+
+        ion-input, ion-textarea {
+            --padding-start: 0;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+    }
+
+    // Header - Glassmorphism
+    ion-header {
+        ion-toolbar {
+            --background: rgba(255, 255, 255, 0.8);
+            --border-width: 0;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+
+            ion-title {
+                font-weight: 800; // Extra bold for brand
+                color: var(--ion-color-primary); // Brand color title
+                font-size: 1.4rem;
+                letter-spacing: -0.02em;
+            }
+
+            ion-buttons {
+                ion-button {
+                    --color: var(--text-primary);
+                    --border-radius: 50%; // Circular buttons in header
+                    width: 40px;
+                    height: 40px;
+                    --padding-start: 0;
+                    --padding-end: 0;
+                }
+            }
+        }
+    }
+
+    // Tab Bar - Floating & Modern
+    ion-tab-bar {
+        --background: #FFFFFF;
+        --border-width: 0;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.04);
+        height: 70px;
+        padding-bottom: 10px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+
+        ion-tab-button {
+            --color: var(--text-tertiary);
+            --color-selected: var(--ion-color-primary);
+
+            &.tab-selected {
+                ion-icon {
+                    transform: translateY(-2px);
+                    color: var(--ion-color-primary);
+                }
+                ion-label {
+                    color: var(--ion-color-primary);
+                    font-weight: 700;
+                }
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 4px;
+                    height: 4px;
+                    background: var(--ion-color-primary);
+                    border-radius: 50%;
+                    margin: 4px auto 0;
+                }
+            }
+
+            ion-icon {
+                font-size: 28px;
+                margin-bottom: 2px;
+                transition: transform 0.2s ease;
+            }
+            ion-label {
+                font-weight: 600;
+                font-size: 11px;
+            }
+        }
+    }
 }
 
 /*
@@ -17,5 +290,53 @@
  * -------------------------------------------
  */
 :root.dark {
+    /* Backgrounds */
+    --page-background: #0F172A; // Deep blue-gray
+    --surface-card: #1E293B;    // Slate 800
 
+    /* Text Colors */
+    --text-primary: #F9FAFB;
+    --text-secondary: #94A3B8; // Slate 400
+    --text-tertiary: #64748B;
+
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+
+    ion-content {
+        --background: var(--page-background);
+    }
+
+    ion-card {
+        --background: var(--surface-card);
+        border: 1px solid rgba(255,255,255,0.05);
+
+        ion-card-header ion-card-title {
+            color: var(--text-primary);
+        }
+    }
+
+    ion-item.item-input .item-inner {
+        background: var(--surface-card);
+        border-color: #334155;
+    }
+
+    ion-item.item-input.item-has-focus .item-inner {
+        border-color: var(--ion-color-primary);
+    }
+
+    ion-input, ion-textarea {
+        color: var(--text-primary);
+    }
+
+    ion-header ion-toolbar {
+        --background: rgba(15, 23, 42, 0.85);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        ion-title { color: var(--text-primary); }
+        ion-buttons ion-button { --color: var(--text-primary); }
+    }
+
+    ion-tab-bar {
+        --background: var(--surface-card);
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+    }
 }

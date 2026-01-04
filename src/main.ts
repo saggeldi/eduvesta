@@ -29,7 +29,7 @@ import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { CoreSiteInfoCronHandler } from '@services/handlers/site-info-cron';
 import { CoreCronDelegate } from '@services/cron';
 import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { coreInterceptorFn } from '@classes/interceptor';
 
 if (CoreConstants.BUILD.isProduction) {
@@ -63,7 +63,8 @@ bootstrapApplication(AppComponent, {
                     deps: [HttpClient],
                 },
             }),
-            AppRoutingModule,
+            RouterModule.forRoot([]),
+            AppRoutingModule.forRoot(),
             CoreModule,
             AddonsModule,
             TestingModule,

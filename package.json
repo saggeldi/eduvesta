@@ -1,5 +1,5 @@
 {
-    "name": "moodlemobile",
+    "name": "eduvestra",
     "version": "5.1.0",
     "description": "The official app for Moodle.",
     "author": {
@@ -174,10 +174,11 @@
         "ts-node": "10.9.2",
         "typescript": "5.9.2",
         "typescript-eslint": "8.44.1",
-        "vinyl": "3.0.1"
+        "vinyl": "3.0.1",
+        "webpack": "^5.104.1"
     },
     "engines": {
-        "node": ">=v22.17 <23"
+        "node": ">=v22.17"
     },
     "cordova": {
         "platforms": [
@@ -212,7 +213,7 @@
             "cordova-plugin-badge": {},
             "cordova-plugin-chooser": {},
             "cordova-plugin-customurlscheme": {
-                "URL_SCHEME": "moodlemobile",
+                "URL_SCHEME": "eduvestra",
                 "ANDROID_SCHEME": " ",
                 "ANDROID_HOST": " ",
                 "ANDROID_PATHPREFIX": "/"
