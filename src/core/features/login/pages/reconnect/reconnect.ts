@@ -36,7 +36,7 @@ import { CoreLoadings } from '@services/overlays/loadings';
 import { CoreLoginMethodsComponent, CoreLoginMethodsCurrentLogin } from '@features/login/components/login-methods/login-methods';
 import { CoreAlerts } from '@services/overlays/alerts';
 import { CoreSharedModule } from '@/core/shared.module';
-import { CoreSiteLogoComponent } from '../../../../components/site-logo/site-logo';
+// import { CoreSiteLogoComponent } from '../../../../components/site-logo/site-logo';
 import { CoreLoginExceededAttemptsComponent } from '../../components/exceeded-attempts/exceeded-attempts';
 import { CoreLoginIdentityProviderComponent } from '../../components/identity-provider/identity-provider';
 
@@ -46,10 +46,10 @@ import { CoreLoginIdentityProviderComponent } from '../../components/identity-pr
 @Component({
     selector: 'page-core-login-reconnect',
     templateUrl: 'reconnect.html',
-    styleUrl: '../../login.scss',
+    styleUrl: 'reconnect.scss',
     imports: [
         CoreSharedModule,
-        CoreSiteLogoComponent,
+        // CoreSiteLogoComponent,
         CoreLoginExceededAttemptsComponent,
         CoreLoginIdentityProviderComponent,
         CoreLoginMethodsComponent,

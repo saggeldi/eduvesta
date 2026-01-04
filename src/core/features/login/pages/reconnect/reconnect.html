@@ -33,13 +33,13 @@
                 }
 
                 <div class="ion-text-wrap ion-text-center core-login-info-box">
-                    <div class="core-login-site">
+                    <!-- <div class="core-login-site">
                         <core-site-logo siteNameMode="p" [showLogo]="!showUserAvatar" [site]="site" />
 
                         @if (displaySiteUrl) {
                             <p class="core-siteurl">{{site.siteUrl}}</p>
                         }
-                    </div>
+                    </div> -->
 
                     <div class="core-login-user">
                         <!-- Show user avatar. -->
@@ -92,7 +92,7 @@
 <ng-template #loginMethods>
     @if (showLoginForm && !isBrowserSSO) {
         <form [formGroup]="credForm" (ngSubmit)="login($event)" class="core-login-form" #reconnectForm>
-            <ion-item class="ion-margin-bottom" lines="inset">
+            <ion-item class="ion-margin-bottom" lines="none">
                 <ion-input class="core-ioninput-password" name="password" type="password"
                     placeholder="{{ 'core.login.password' | translate }}" formControlName="password" [clearOnEdit]="false"
                     autocomplete="current-password" enterkeyhint="go" required="true" [attr.aria-label]="'core.login.password' | translate">

@@ -1,0 +1,146 @@
+@use "theme/globals" as *;
+
+$eduvestra-blue: #2B6FFE;
+$eduvestra-bg: #f2f4f8;
+
+:host {
+    ion-content {
+        --background: #{$eduvestra-bg};
+        --padding-top: 24px;
+        --padding-bottom: 24px;
+    }
+}
+
+// Warning Card (Session Expired)
+.core-warning-card {
+    background-color: #FFF4E5 !important; // Light orange/yellow background
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    margin-bottom: 32px;
+    border: none;
+
+    ion-item {
+        --background: transparent;
+        --min-height: 60px;
+
+        ion-icon {
+            color: var(--ion-color-warning);
+            font-size: 24px;
+            margin-right: 16px;
+        }
+
+        ion-label p {
+            font-size: 15px;
+            font-weight: 500;
+            color: #663C00; // Darker brown/orange text
+        }
+    }
+}
+
+// Info Box (Site Logo & User)
+.core-login-info-box {
+    margin-bottom: 40px;
+
+    .core-login-site {
+        margin-bottom: 24px;
+
+        core-site-logo {
+            --core-site-logo-max-height: 80px;
+        }
+
+        .core-siteurl {
+            color: var(--ion-color-medium);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+    }
+
+    .core-login-user {
+        core-user-avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            --core-avatar-size: 80px;
+            --core-avatar-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .core-login-fullname {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ion-text-color);
+        }
+    }
+}
+
+// Login Form
+.core-login-form {
+    background: #fff;
+    padding: 24px;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+
+    ion-item {
+        --background: #fdfdfd;
+        --border-radius: 16px;
+        --padding-start: 20px;
+        --inner-padding-end: 16px;
+        --min-height: 60px;
+        --border-width: 0;
+        margin-bottom: 24px;
+        margin-bottom: 24px;
+        border: 1.5px solid #CFD8DC; // Visible gray border by default
+        background: #fff;
+        box-shadow: none; // Flat look by default as per image
+        transition: all 0.2s ease;
+
+        &.item-has-focus {
+            border-color: $eduvestra-blue;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(43, 111, 254, 0.1); // Subtle glow instead of heavy shadow
+            transform: translateY(0); // No movement, just state change
+        }
+
+        ion-input {
+            --padding-top: 20px;
+            --padding-bottom: 20px;
+            font-size: 17px;
+            font-weight: 500;
+            --placeholder-color: #999;
+            --placeholder-opacity: 1;
+        }
+
+        ion-input-password-toggle {
+            color: var(--ion-color-medium);
+            margin-right: 8px;
+        }
+    }
+
+    // Login Button
+    ion-button[type="submit"] {
+        --background: #{$eduvestra-blue};
+        --border-radius: 12px;
+        --box-shadow: 0 4px 12px rgba(43, 111, 254, 0.3);
+        height: 52px;
+        margin: 24px 0 16px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        font-size: 16px;
+        text-transform: none;
+    }
+
+    // Forgot Password
+    .core-login-forgotten-password {
+        text-decoration: none;
+        color: var(--ion-color-medium);
+        font-size: 14px;
+        font-weight: 500;
+        height: auto;
+        --padding-top: 8px;
+        --padding-bottom: 8px;
+
+        &:hover {
+            color: $eduvestra-blue;
+        }
+    }
+}
