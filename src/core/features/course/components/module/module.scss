@@ -15,48 +15,50 @@
         --card-padding-bottom: 0px;
     }
 
+    // --- Modern Activity Card Styling ---
     ion-card {
-        margin: var(--vertical-spacing) var(--horizontal-spacing);
+        margin: 12px 16px !important; // Consistent spacing
         padding: 0px;
-        --ion-card-border-width: var(--card-border-width);
-        --ion-card-radius: var(--card-radius);
-        --ion-card-background: var(--card-background);
-        padding-bottom: var(--card-padding-bottom);
-        border-bottom: var(--activity-border);
+        --ion-card-border-width: 0;
+        --ion-card-radius: 16px;
+        --ion-card-background: white !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+        border-bottom: 0 !important; // Remove old border
+        overflow: visible; // Allow shadows/badges to pop if needed
     }
 
-    ion-badge {
-        @include margin-horizontal(null, 4px);
-        font: var(--mdl-typography-body-font-sm);
-        display: inline-flex;
-        align-items: center;
-        ion-icon {
-            @include margin-horizontal(0px, 4px);
-        }
-    }
+    // Button Styling (Mark as done, etc)
+    ion-button {
+        --border-radius: 20px;
+        --box-shadow: none;
+        font-weight: 600;
+        text-transform: none;
 
-    ion-item {
-        --padding-start: 0px;
-        --inner-padding-end: 0px;
-        --background: transparent;
-        ion-label {
-            margin-top: 0px;
-            margin-bottom: 0px;
+        &.button-outline {
+             --border-color: #d1d5db;
+             --color: #374151;
+             --border-width: 1.5px;
         }
     }
 
     .activity-main {
-        --min-height: 52px;
+        --min-height: 64px; // Taller touch target
         display: flex;
         flex-direction: row;
+        padding: 12px 8px;
 
+        // Activity Icon container
         core-mod-icon {
             --module-icon-padding: 0px;
             --module-legacy-icon-padding: 4px;
-            --module-icon-radius: var(--mdl-shape-borderRadius-xs);
+            --module-icon-radius: 8px;
+            @include margin-horizontal(8px, 12px);
+            align-self: center; // Center vertically
 
-            @include margin-horizontal(null, 8px);
-            align-self: self-start;
+            img {
+                 width: 32px;
+                 height: 32px;
+            }
         }
 
         .activity-title {
@@ -64,48 +66,52 @@
             align-self: center;
             @include margin-horizontal(null, var(--horizontal-spacing));
 
-            .item-heading ion-icon {
-                @include margin-horizontal(8px, null);
-                vertical-align: middle;
+            .item-heading {
+                font-size: 15px; // Reduced from potentially large defaults
+                font-weight: 600;
+                color: #1f2937;
+                line-height: 1.4;
+
+                ion-icon {
+                    @include margin-horizontal(8px, null);
+                    vertical-align: middle;
+                    color: #6b7280;
+                    font-size: 14px;
+                }
             }
         }
 
         .core-module-buttons {
-            align-self: self-start;
-
+            align-self: center;
             display: flex;
             flex-flow: row;
             align-items: center;
             z-index: 1;
             justify-content: flex-end;
-            align-content: center;
 
+            // "More" dots button
             ion-button.core-module-button-more {
                 cursor: pointer;
-                pointer-events: auto;
-                margin: 0px 8px;
-                --a11y-target-min-size: 32px;
-                width: var(--a11y-target-min-size);
-                height: var(--a11y-target-min-size);
-                min-width: var(--a11y-target-min-size);
-                min-height: var(--a11y-target-min-size);
-                --padding-start: 0px;
-                --padding-end: 0px;
-                ion-icon {
-                    font-size: var(--mdl-typography-icon-fontSize-md);
-                }
+                margin: 0px 4px;
+                --color: #9ca3af;
+                width: 32px;
+                height: 32px;
+
+                ion-icon { font-size: 20px; }
             }
 
             core-course-module-completion {
                 --margin: 0px;
+                margin-right: 8px;
+                // Style the completion checkmark/button if feasible here
             }
         }
 
         core-mod-icon,
         .activity-title,
         .core-module-buttons {
-            margin-top: var(--vertical-spacing);
-            margin-bottom: var(--vertical-spacing);
+            margin-top: 0; // Reset margins handled by padding
+            margin-bottom: 0;
         }
     }
 
@@ -183,9 +189,18 @@
 
         &.core-course-last-module-viewed {
             display: flex;
-            background-color: var(--info-tint);
-            color: var(--info-shade);
-            font: var(--mdl-typography-label-font-md);
+            background-color: #e0f2fe; // Light blue 100
+            color: #0369a1; // Sky 700
+            font-weight: 600;
+            border-radius: 12px;
+            margin: 0 16px 12px 16px; // Inset from card edges
+            padding: 10px 12px;
+            align-items: center;
+
+            ion-icon {
+                color: #0284c7; // Sky 600
+                font-size: 16px;
+            }
         }
     }
 
@@ -214,6 +229,20 @@
 
 
 :host-context(:root.dark) {
+    ion-card {
+        --ion-card-background: #2a2a2a !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+    }
+
+    .activity-main .activity-title .item-heading {
+        color: #f3f4f6;
+    }
+
+    ion-button.button-outline {
+        --border-color: #4b5563;
+        --color: #e5e7eb;
+    }
+
     .activity-description-availabilityinfo {
         .core-module-availabilityinfo {
             background: var(--gray-800);
@@ -221,7 +250,8 @@
     }
 
     .colored-box-with-icon.core-course-last-module-viewed {
-        background-color: var(--info-shade);
-        color: var(--info-tint);
+        background-color: rgba(3, 105, 161, 0.2); // Darker blue bg
+        color: #7dd3fc; // Sky 300
+        ion-icon { color: #38bdf8; }
     }
 }

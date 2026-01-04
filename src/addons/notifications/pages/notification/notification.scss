@@ -4,40 +4,119 @@
     --icon-size: 44px;
     --extra-icon-size: 16px;
 
+    // --- Page Background ---
+    ion-content {
+        --background: #f5f7fa;
+    }
+
+    .notification-card-container {
+        padding: 16px;
+    }
+
+    .core-notification-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        padding: 8px; // Padding inside the card
+    }
+
+    ion-item {
+        --background: transparent;
+        --padding-start: 16px;
+        --padding-end: 16px;
+    }
+
     .core-notification-title {
+        --min-height: 80px;
+        margin-bottom: 0px;
+
         [slot=start] {
-            align-self: start;
-            margin-top: 16px;
+            align-self: center; // Center avatar
+            margin-top: 0;
+            margin-right: 16px;
         }
+
+        // Avatar Styling
+        core-user-avatar {
+             --size: 56px; // Larger avatar
+        }
+
+        .core-notification-icon {
+             width: 48px;
+             height: 48px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             background: #eff6ff; // Light blue
+             color: #2b6ffe;
+             border-radius: 12px;
+             font-size: 24px;
+
+             img { width: 100%; height: 100%; object-fit: contain; }
+        }
+
+        ion-label {
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
         p.item-heading {
-            font: var(--mdl-typography-body-font-lg);
+            font-family: 'Inter', sans-serif;
+            font-size: 20px !important; // Big, clear title
+            font-weight: 700 !important;
+            color: #111827;
+            margin-bottom: 4px;
+            white-space: normal;
         }
-        p {
-            font: var(--mdl-typography-body-font-sm);
+
+        p.item-date {
+            font-size: 13px !important;
+            color: #6b7280;
         }
     }
 
     .core-notification-body {
+        margin-top: 0;
+
         core-format-text {
-            font-size: var(--text-size);
+            font-size: 15px;
+            line-height: 1.6;
+            color: #374151;
+            display: block;
+            padding-bottom: 16px;
         }
 
         h2 {
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-top: 16px;
+        }
+
+        // Link Styling
+        a {
+            color: #2b6ffe;
+            font-weight: 500;
+            text-decoration: none;
         }
 
         core-format-text ::ng-deep {
             .forumpost {
-                border: 1px solid var(--gray-200);
+                border: 1px solid #e5e7eb;
+                border-radius: 12px;
                 width: 100%;
-                margin: 0 0 1em 0;
+                margin: 12px 0;
+                box-shadow: none;
 
                 td {
-                    padding: 10px;
+                    padding: 16px;
                 }
 
                 .header {
-                    background-color: var(--light);
+                    background-color: #f9fafb;
+                    border-bottom: 1px solid #e5e7eb;
+                    border-top-left-radius: 12px;
+                    border-top-right-radius: 12px;
 
                     .picture {
                         width: 48px;
@@ -46,19 +125,18 @@
                         padding-top: 8px;
 
                         img {
-                            width: 44px !important;
+                            width: 32px !important;
+                            height: 32px !important;
+                            border-radius: 50%;
                         }
                     }
                 }
 
                 .subject {
-                    font-weight: 700;
-                    margin-bottom: 1rem;
+                    font-weight: 600;
+                    margin-bottom: 0.5rem;
+                    color: #1f2937;
                 }
-            }
-
-            a {
-                text-decoration: none;
             }
 
             .userpicture {
@@ -82,8 +160,30 @@
             hr {
                 margin-top: 1.5rem;
                 margin-bottom: 1.5rem;
-                background-color: var(--gray-200);
+                border: 0;
+                border-top: 1px solid #e5e7eb;
             }
+        }
+    }
+
+    // Dark Mode Support
+    :host-context(.dark) {
+        ion-content { --background: #111827; }
+        .core-notification-card {
+            background: #1f2937;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .core-notification-title {
+             p.item-heading { color: #f9fafb; }
+             p.item-date { color: #9ca3af; }
+             .core-notification-icon {
+                 background: rgba(59, 130, 246, 0.2);
+                 color: #60a5fa;
+             }
+        }
+        .core-notification-body {
+            core-format-text { color: #e5e7eb; }
+            a { color: #60a5fa; }
         }
     }
 }

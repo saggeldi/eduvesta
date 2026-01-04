@@ -27,6 +27,67 @@
     }
 
     .core-course-header {
-        background: var(--ion-item-background);
+        background: white;
+        border-bottom-left-radius: 24px;
+        border-bottom-right-radius: 24px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        z-index: 10;
+        position: relative;
+    }
+
+    core-course-image {
+        --core-image-size: 56px;
+        @include margin(16px, 16px, 16px, 0px);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    // Title Typography
+    h1 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700 !important;
+        font-size: 20px !important; // Larger course title
+        color: #1a1a1a;
+        margin-bottom: 4px;
+    }
+
+    // Progress Bar
+    .core-course-progress {
+        --progress-background: #e5e7eb;
+        --progress-value-background: #2b6ffe; // Brand blue
+        height: 6px;
+        border-radius: 3px;
+        margin-top: 8px;
+
+        core-progress-bar {
+             // Ensure inner ionic progress bar respects radius
+             --buffer-background: #e5e7eb;
+             --progress-background: #2b6ffe;
+        }
+    }
+
+    ion-item.core-format-progress-list {
+        --background: transparent;
+        --padding-start: 16px;
+        --inner-padding-end: 16px;
+    }
+
+    // Dark Mode
+    :host-context(.dark) {
+        .core-course-header {
+            background: #2a2a2a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        h1 { color: #f3f4f6; }
+        .core-course-progress {
+            --progress-background: #374151;
+            --progress-value-background: #60a5fa;
+             core-progress-bar {
+                 --buffer-background: #374151;
+                 --progress-background: #60a5fa;
+            }
+        }
     }
 }

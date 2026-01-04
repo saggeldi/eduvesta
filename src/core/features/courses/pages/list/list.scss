@@ -1,0 +1,101 @@
+@use "theme/globals" as *;
+
+:host {
+    display: block;
+    background: #f5f7fa;
+
+    ion-content {
+        --background: #f5f7fa;
+    }
+}
+
+// Search Bar Modernization
+core-search-box {
+    display: block;
+    padding: 16px 16px 8px 16px;
+
+    // We need to style the inner ion-searchbar
+    ::ng-deep ion-searchbar {
+        --background: white;
+        --box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        --border-radius: 12px;
+        --placeholder-color: #9ca3af;
+        --icon-color: #6b7280;
+        padding: 0 !important;
+        height: 48px;
+
+        .searchbar-input-container {
+             height: 48px;
+        }
+    }
+}
+
+// "Show only my courses" Toggle - Card Style
+ion-item.ion-text-wrap[lines="none"] {
+    --background: white;
+    --border-radius: 16px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 0;
+    margin: 8px 16px 16px 16px; // Spacing around the card
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+
+    ion-toggle {
+        font-weight: 600;
+        color: #4b5563;
+        font-size: 15px;
+        --track-background: #e5e7eb;
+        --handle-background: white;
+
+        &::part(track) {
+            height: 24px;
+            width: 44px;
+        }
+    }
+}
+
+// "Total courses" header
+ion-item-divider {
+    --background: transparent;
+    --padding-start: 24px;
+    --color: #6b7280;
+    border: none;
+    margin-bottom: 4px;
+
+    ion-label h2 {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+// Course List Container
+ion-list.core-course-list {
+    background: transparent !important;
+    padding-bottom: 24px;
+    padding-inline: 16px;
+}
+
+// Dark Mode Support
+:host-context(.dark) {
+    background: #1a1a1a;
+    ion-content { --background: #1a1a1a; }
+
+    core-search-box ::ng-deep ion-searchbar {
+        --background: #2a2a2a;
+        --box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        --placeholder-color: #9ca3af;
+        --color: white;
+    }
+
+    ion-item.ion-text-wrap[lines="none"] {
+        --background: #2a2a2a;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        ion-toggle { color: #e5e7eb; }
+    }
+
+    ion-item-divider {
+        ion-label h2 { color: #9ca3af; }
+    }
+}

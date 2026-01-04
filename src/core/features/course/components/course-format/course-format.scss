@@ -1,12 +1,32 @@
 .core-course-section-nav-buttons {
     display: flex;
     justify-content: space-between;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 16px;
+    background: transparent;
+    gap: 16px; // Add space between buttons
 
     ion-button {
         flex: 1;
-        margin-left: 4px;
-        margin-right: 4px;
+        margin: 0; // Reset margins, use gap
+        --border-radius: 12px;
+        --background: #2b6ffe; // Brand blue
+        --box-shadow: 0 4px 12px rgba(43, 111, 254, 0.3); // Colored shadow
+        --color: white;
+        height: 48px;
+        font-weight: 600;
+        font-size: 15px;
+        text-transform: none;
+
+        ion-icon {
+            font-size: 18px;
+        }
+    }
+}
+
+// Dark Mode Support
+:host-context(.dark) {
+    .core-course-section-nav-buttons ion-button {
+        --background: #2563eb;
+        --box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 }
