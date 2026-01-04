@@ -1,48 +1,116 @@
 @use "theme/globals" as *;
 
 :host {
+    // Modern filter row container
     ion-row.addon-block-myoverview-filter {
-        margin: 8px;
+        margin: 16px 16px 8px 16px;
         padding: 0;
+        gap: 8px;
 
         ion-col {
             padding: 0;
-            margin-right: 2px;
-            margin-left: 2px;
         }
 
-        ion-button,
-        core-combobox ::ng-deep ion-select {
-            --a11y-sizing-minTargetSize: 40px;
-            margin: 0;
-        }
+        // Modern search bar styling
+        ion-searchbar {
+            padding: 0;
+            --height: 44px;
+            --border-radius: 12px;
+            --background: #f8f9fa;
+            --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --color: var(--text-primary, #1F2937);
+            --placeholder-color: var(--text-tertiary, #9CA3AF);
+            --icon-color: var(--text-tertiary, #9CA3AF);
+            --clear-button-color: var(--text-secondary, #4B5563);
+            transition: all 0.2s ease;
 
-        ion-button {
-            --border-width: 0;
-
-            ion-icon {
-                font-size: var(--mdl-typography-icon-fontSize-md);
+            &.searchbar-has-focus {
+                --background: white;
+                --box-shadow: 0 0 0 3px rgba(43, 111, 254, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
             }
         }
 
-        ion-searchbar {
-            padding: 0;
-            --height: 40px;
+        // Modern combobox/select styling
+        core-combobox ::ng-deep ion-select {
+            --a11y-sizing-minTargetSize: 44px;
+            margin: 0;
+
+            &::part(container) {
+                background: #f8f9fa;
+                border-radius: 12px;
+                padding: 0 12px;
+                transition: all 0.2s ease;
+            }
+
+            &:hover::part(container) {
+                background: #e9ecef;
+            }
+        }
+
+        // Modern toggle buttons (list/card view)
+        ion-button {
+            --border-width: 0;
+            --border-radius: 12px;
+            --background: #f8f9fa;
+            --background-hover: #e9ecef;
+            --background-activated: #dee2e6;
+            --color: var(--text-secondary, #4B5563);
+            --padding-start: 12px;
+            --padding-end: 12px;
+            height: 44px;
+            margin: 0;
+            transition: all 0.2s ease;
+
+            &:hover {
+                --color: var(--ion-color-primary, #2B6FFE);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            }
+
+            ion-icon {
+                font-size: 20px;
+            }
         }
     }
 
+    // Enhanced empty state
     core-empty-box {
+        padding: 48px 24px;
+
         .item-heading {
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary, #1F2937);
+            letter-spacing: -0.01em;
         }
 
         .subdued {
-            color: var(--subdued-text-color);
+            color: var(--text-secondary, #4B5563);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        ion-button {
+            --border-radius: 50px;
+            --padding-start: 24px;
+            --padding-end: 24px;
+            --padding-top: 12px;
+            --padding-bottom: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+            box-shadow: 0 2px 8px rgba(43, 111, 254, 0.2);
+            transition: all 0.2s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(43, 111, 254, 0.3);
+            }
         }
     }
 
+    // Download button styling
     ion-item-divider .core-button-spinner {
         display: flex;
         align-items: center;
@@ -50,6 +118,51 @@
 
         ion-badge.core-course-download-courses-progress {
             @include margin(null, 12px, null, null);
+        }
+    }
+
+    // Course list container
+    .core-course-list {
+        padding: 0 8px 16px 8px;
+    }
+}
+
+// Dark mode adjustments
+:host-context(:root.dark) {
+    ion-row.addon-block-myoverview-filter {
+        ion-searchbar {
+            --background: rgba(255, 255, 255, 0.05);
+            --color: var(--text-primary, #F9FAFB);
+            --placeholder-color: var(--text-tertiary, #64748B);
+
+            &.searchbar-has-focus {
+                --background: rgba(255, 255, 255, 0.08);
+            }
+        }
+
+        core-combobox ::ng-deep ion-select::part(container) {
+            background: rgba(255, 255, 255, 0.05);
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.08);
+            }
+        }
+
+        ion-button {
+            --background: rgba(255, 255, 255, 0.05);
+            --background-hover: rgba(255, 255, 255, 0.08);
+            --background-activated: rgba(255, 255, 255, 0.12);
+            --color: var(--text-secondary, #94A3B8);
+        }
+    }
+
+    core-empty-box {
+        .item-heading {
+            color: var(--text-primary, #F9FAFB);
+        }
+
+        .subdued {
+            color: var(--text-secondary, #94A3B8);
         }
     }
 }

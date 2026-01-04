@@ -1,7 +1,192 @@
-ion-item {
-	--border-color: var(--core-more-item-border, var(--ion-border-color));
+// Modern styling for the More page
+:host {
+    --core-more-icon: var(--ion-color-primary);
+    --core-more-item-border: transparent;
+}
 
-    > ion-icon[slot] {
-        color: var(--core-more-icon) !important;
+ion-content {
+    --background: #f5f7fa !important;
+}
+
+ion-list {
+    background: transparent;
+    padding: 16px;
+}
+
+ion-item {
+    --border-color: transparent;
+    --background: #f5f7fa;
+    --padding-start: 20px;
+    --padding-end: 16px;
+    --inner-padding-end: 0;
+    --min-height: 64px;
+
+    margin-bottom: 12px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover, &:active {
+        --background: #e8eaed;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+
+    > ion-icon[slot="start"] {
+        color: var(--core-more-icon, var(--ion-color-primary)) !important;
+        font-size: 24px;
+        margin-inline-end: 20px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--ion-color-primary-tint, rgba(var(--ion-color-primary-rgb), 0.1));
+        border-radius: 12px;
+        padding: 8px;
+    }
+
+    ion-label {
+        margin: 0;
+
+        .item-heading {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--ion-color-dark, #1a1a1a);
+            margin: 0;
+            line-height: 1.4;
+        }
+    }
+
+    ion-badge {
+        --background: var(--ion-color-primary);
+        --color: white;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 12px;
+        min-width: 24px;
+        text-align: center;
+    }
+
+    ion-spinner {
+        color: var(--ion-color-primary);
+        width: 20px;
+        height: 20px;
+    }
+
+    &::part(detail-icon) {
+        color: var(--ion-color-medium, #92949c);
+        font-size: 20px;
+        opacity: 0.5;
+    }
+
+    // Loading state
+    &.ion-text-center {
+        box-shadow: none;
+        --background: transparent;
+        margin-bottom: 0;
+    }
+}
+
+// Group similar items visually
+ion-item.core-moremenu-handler,
+ion-item.core-moremenu-customitem {
+    // Add category-based coloring if needed
+    &[class*="calendar"] ion-icon[slot="start"] {
+        background: rgba(255, 149, 0, 0.1);
+        color: #ff9500 !important;
+    }
+
+    &[class*="blog"] ion-icon[slot="start"] {
+        background: rgba(52, 199, 89, 0.1);
+        color: #34c759 !important;
+    }
+
+    &[class*="tag"] ion-icon[slot="start"] {
+        background: rgba(88, 86, 214, 0.1);
+        color: #5856d6 !important;
+    }
+}
+
+// Scan QR code - Purple/Violet color
+ion-item ion-icon[name="fas-qrcode"] {
+    background: rgba(138, 43, 226, 0.1) !important;
+    color: #8a2be2 !important;
+}
+
+// App Settings - Orange color
+ion-item ion-icon[name="fas-gears"] {
+    background: rgba(255, 140, 0, 0.1) !important;
+    color: #ff8c00 !important;
+}
+
+
+// Header styling
+ion-header {
+    ion-toolbar {
+        --background: #f5f7fa;
+        --border-width: 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+        ion-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--ion-color-dark, #1a1a1a);
+            margin: 0;
+        }
+    }
+}
+
+// Accessibility
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+// Responsive improvements
+@media (min-width: 768px) {
+    ion-list {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 24px;
+    }
+
+    ion-item {
+        --min-height: 72px;
+    }
+}
+
+// Dark mode support - using same light theme
+@media (prefers-color-scheme: dark) {
+    :host {
+        --core-more-icon: var(--ion-color-primary);
+    }
+
+    ion-content {
+        --background: #f5f7fa !important;
+    }
+
+    ion-header ion-toolbar {
+        --background: #f5f7fa !important;
+    }
+
+    ion-item {
+        --background: #f5f7fa !important;
+
+        &:hover, &:active {
+            --background: #e8eaed !important;
+        }
+
+        ion-label .item-heading {
+            color: var(--ion-color-dark, #1a1a1a);
+        }
     }
 }

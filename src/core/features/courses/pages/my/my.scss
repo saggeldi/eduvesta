@@ -1,6 +1,13 @@
+// Modern page background
+ion-content {
+    --background: var(--ion-color-light, #f5f7fa);
+}
+
+// Hide default divider
 :host ::ng-deep ion-item-divider {
     display: none !important;
 }
+
 :host ::ng-deep core-loading {
     --internal-loading-inline-min-height: calc(100vh - var(--core-header-toolbar-height));
 }
@@ -9,7 +16,48 @@
     --internal-loading-inline-min-height: calc(100vh - var(--core-header-toolbar-height) - var(--bottom-tabs-size) - 2px);
 }
 
+// Modern title section styling
+ion-item.divider {
+    --background: white;
+    --border-color: transparent;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    margin: 16px 16px 12px 16px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+    ion-label h2.big {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-primary, #1F2937);
+        letter-spacing: -0.02em;
+        margin: 8px 0;
+    }
+}
+
+// Dark mode support for title section
+:host-context(:root.dark) {
+    ion-item.divider {
+        --background: var(--surface-card, #1E293B);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+        ion-label h2.big {
+            color: var(--text-primary, #F9FAFB);
+        }
+    }
+}
+
+// Modern block container
 core-block ::ng-deep ion-card.addon-block-myoverview {
     --border-width: 0;
-    margin: 0;
+    margin: 0 16px 16px 16px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+
+:host-context(:root.dark) core-block ::ng-deep ion-card.addon-block-myoverview {
+    background: var(--surface-card, #1E293B);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }

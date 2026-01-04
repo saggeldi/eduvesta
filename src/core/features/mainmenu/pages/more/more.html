@@ -13,24 +13,34 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
+
 <ion-content>
     <ion-list>
+        <!-- Loading State -->
         @if ((!handlers || !handlers.length) && !handlersLoaded) {
-            <ion-item class="ion-text-center">
+            <ion-item class="ion-text-center" lines="none">
                 <ion-label>
                     <ion-spinner [attr.aria-label]="'core.loading' | translate" />
                 </ion-label>
             </ion-item>
         }
-        <ion-item button *ngFor="let handler of handlers" [class]="['core-moremenu-handler', handler.class]"
-            (click)="openHandler(handler)" [attr.aria-label]="handler.title | translate" [detail]="true">
+
+        <!-- Dynamic Handlers -->
+        <ion-item
+            button
+            *ngFor="let handler of handlers"
+            [class]="['core-moremenu-handler', handler.class]"
+            (click)="openHandler(handler)"
+            [attr.aria-label]="handler.title | translate"
+            [detail]="true"
+            lines="none">
             <ion-icon [name]="handler.icon" slot="start" aria-hidden="true" />
             <ion-label>
-                <p class="item-heading">{{ handler.title | translate}}</p>
+                <p class="item-heading">{{ handler.title | translate }}</p>
             </ion-label>
             @if (handler.showBadge) {
                 <ion-badge slot="end" [hidden]="handler.loading || !handler.badge" aria-hidden="true">
-                    {{handler.badge}}
+                    {{ handler.badge }}
                 </ion-badge>
                 @if (handler.badge && handler.badgeA11yText) {
                     <span class="sr-only">
@@ -42,40 +52,67 @@
                 }
             }
         </ion-item>
+
+        <!-- Custom Menu Items -->
         <ng-container *ngFor="let item of customItems">
             @if (item.type !== 'embedded') {
-                <ion-item button [href]="item.url" [attr.aria-label]="item.label" core-link [capture]="item.type === 'app'"
-                    [inApp]="item.type === 'inappbrowser'" class="core-moremenu-customitem" [detail]="true"
-                    [detailIcon]="item.type === 'browser' ? 'open-outline' : 'chevron-forward'">
+                <ion-item
+                    button
+                    [href]="item.url"
+                    [attr.aria-label]="item.label"
+                    core-link
+                    [capture]="item.type === 'app'"
+                    [inApp]="item.type === 'inappbrowser'"
+                    class="core-moremenu-customitem"
+                    [detail]="true"
+                    [detailIcon]="item.type === 'browser' ? 'open-outline' : 'chevron-forward'"
+                    lines="none">
                     <ion-icon [name]="item.icon" slot="start" aria-hidden="true" />
                     <ion-label>
-                        <p class="item-heading">{{item.label}}</p>
+                        <p class="item-heading">{{ item.label }}</p>
                     </ion-label>
                 </ion-item>
             } @else {
-                <ion-item button (click)="openItem(item)" [attr.aria-label]="item.label" class="core-moremenu-customitem" [detail]="true">
+                <ion-item
+                    button
+                    (click)="openItem(item)"
+                    [attr.aria-label]="item.label"
+                    class="core-moremenu-customitem"
+                    [detail]="true"
+                    lines="none">
                     <ion-icon [name]="item.icon" slot="start" aria-hidden="true" />
                     <ion-label>
-                        <p class="item-heading">{{item.label}}</p>
+                        <p class="item-heading">{{ item.label }}</p>
                     </ion-label>
                 </ion-item>
             }
         </ng-container>
+
+        <!-- QR Scanner -->
         @if (showScanQR) {
-            <ion-item button (click)="scanQR()" [detail]="true">
+            <ion-item
+                button
+                (click)="scanQR()"
+                [detail]="true"
+                lines="none">
                 <ion-icon name="fas-qrcode" slot="start" aria-hidden="true" />
                 <ion-label>
                     <p class="item-heading">{{ 'core.scanqr' | translate }}</p>
                 </ion-label>
             </ion-item>
         }
+
+        <!-- App Settings -->
+        <ion-item
+            button
+            (click)="openSettings()"
+            [attr.aria-label]="'core.settings.appsettings' | translate"
+            [detail]="true"
+            lines="none">
+            <ion-icon name="fas-gears" slot="start" aria-hidden="true" />
+            <ion-label>
+                <p class="item-heading">{{ 'core.settings.appsettings' | translate }}</p>
+            </ion-label>
+        </ion-item>
     </ion-list>
 </ion-content>
-<ion-footer>
-    <ion-item button (click)="openSettings()" [attr.aria-label]="'core.settings.appsettings' | translate" [detail]="true">
-        <ion-icon name="fas-gears" slot="start" aria-hidden="true" />
-        <ion-label>
-            <p class="item-heading">{{ 'core.settings.appsettings' | translate }}</p>
-        </ion-label>
-    </ion-item>
-</ion-footer>

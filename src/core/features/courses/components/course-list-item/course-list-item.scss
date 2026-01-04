@@ -102,6 +102,18 @@ ion-chip {
 // List layout.
 ion-card.core-course-list-item {
     max-width: var(--list-item-max-width);
+    margin: 8px 0;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+
+    &:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
+        border-color: rgba(43, 111, 254, 0.1);
+    }
 
     core-course-image {
         --core-image-radius: var(--avatar-radius);
@@ -111,10 +123,21 @@ ion-card.core-course-list-item {
 
     ion-item::part(native) {
         --padding-start: var(--avatar-margin);
+        --padding-end: 16px;
+        --padding-top: 12px;
+        --padding-bottom: 12px;
     }
 
     .core-course-maininfo {
         @include margin-horizontal(null, 32px);
+    }
+
+    .item-heading {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text-primary, #1F2937);
+        line-height: 1.4;
+        margin-bottom: 4px;
     }
 
     @if ($core-course-hide-progress-on-list-items) {
@@ -136,13 +159,46 @@ ion-card.core-course-list-card {
     height: calc(100% - var(--card-vertical-margin) - var(--card-vertical-margin));
     margin-top: var(--card-vertical-margin);
     margin-bottom: var(--card-vertical-margin);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+
+    &:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        transform: translateY(-4px);
+        border-color: rgba(43, 111, 254, 0.15);
+    }
 
     core-course-image {
         --core-course-card-image-aspect-ratio: 5/2;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2B6FFE, #54a0ff);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+    }
+
+    &:hover core-course-image::after {
+        opacity: 1;
     }
 
     .core-course-shortname {
         margin-bottom: 8px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--ion-color-primary, #2B6FFE);
     }
 
     ion-item {
@@ -153,10 +209,11 @@ ion-card.core-course-list-card {
         &::part(native) {
             flex-grow: 1;
             align-items: self-start;
+            padding: 16px;
         }
 
         > ion-label{
-            margin: 16px 0;
+            margin: 0;
 
             display: flex;
             flex-direction: column;
@@ -167,6 +224,12 @@ ion-card.core-course-list-card {
             // Clamp one line with ellipsis on tablet view, and 2 in mobile.
             .item-heading {
                 @include ellipsis();
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--text-primary, #1F2937);
+                line-height: 1.4;
+                margin-bottom: 8px;
+                letter-spacing: -0.01em;
             }
 
             @include media-breakpoint-down(md) {
@@ -179,10 +242,13 @@ ion-card.core-course-list-card {
             .core-course-maininfo {
                 flex-grow: 1;
                 max-width: 100%;
+                font-size: 0.9rem;
+                color: var(--text-secondary, #4B5563);
             }
 
             .core-course-progress {
                 align-self: stretch;
+                margin-top: 12px;
             }
         }
     }
@@ -229,6 +295,29 @@ ion-card.core-course-list-card {
                     margin-right: 2px;
                 }
             }
+        }
+    }
+}
+
+// Dark mode support for course cards
+:host-context(:root.dark) {
+    ion-card.core-course-list-item,
+    ion-card.core-course-list-card {
+        background: var(--surface-card, #1E293B);
+        border-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+        &:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+            border-color: rgba(43, 111, 254, 0.3);
+        }
+
+        .item-heading {
+            color: var(--text-primary, #F9FAFB);
+        }
+
+        .core-course-maininfo {
+            color: var(--text-secondary, #94A3B8);
         }
     }
 }
