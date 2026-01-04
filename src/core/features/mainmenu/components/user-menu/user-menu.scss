@@ -1,33 +1,232 @@
 @use "theme/globals" as *;
 
 :host {
-    .core-user-menu-separator {
-        --inner-border-width: 0;
-        --border-width: 1px 0 0 0;
+    ion-content {
+        --background: #f5f7fa !important; // Light gray background
     }
-}
 
-.core-usermenu-siteinfo {
-    text-align: center;
-    ion-label {
+    ion-header {
+        ion-toolbar {
+            --background: #f5f7fa !important; // Match content background
+            --border-width: 0;
+            --min-height: 56px;
+
+            ion-title h1 {
+                font-family: 'Inter', -apple-system, sans-serif;
+                font-weight: 700;
+                font-size: 20px;
+                color: #1a1a1a;
+            }
+
+            ion-button {
+                color: #666;
+            }
+        }
+    }
+
+    // Main content container
+    ion-list {
+        background: transparent !important;
         margin: 0;
+        padding: 16px;
+        padding-top: 0;
     }
-    --padding-top: 10px;
-    --padding-bottom: 10px;
+
+    // Site info section
+    .core-usermenu-siteinfo {
+        --background: white;
+        margin-bottom: 16px;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        --padding-start: 16px;
+        --padding-end: 16px;
+        --padding-top: 16px;
+        --padding-bottom: 16px;
+
+        ion-label {
+            margin: 0;
+            text-align: center;
+        }
+
+        &::part(native) {
+            border-radius: 16px;
+        }
+    }
+
+    // Site logo styling
+    core-site-logo {
+        --core-site-logo-margin: 0 auto 8px auto;
+        --core-site-logo-max-height: 48px;
+        --core-site-logo-sitename-color: #1a1a1a;
+        --core-site-logo-sitename-font: 600 16px/1.4 'Inter', sans-serif;
+
+        img {
+            border-radius: 8px;
+        }
+    }
+
+    // Site URL link
+    .core-usermenu-siteurl {
+        display: inline-block;
+        font-size: 13px;
+        color: #2b6ffe; // Brand blue
+        background: rgba(43, 111, 254, 0.08); // Light blue bg
+        padding: 4px 12px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    // Profile section
+    .core-usermenu-profile {
+        --background: white;
+        margin-bottom: 16px;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        --padding-start: 16px;
+        --padding-end: 16px;
+        --padding-top: 12px;
+        --padding-bottom: 12px;
+
+        core-user-avatar {
+            --core-avatar-size: 48px;
+            --core-avatar-border-radius: 12px;
+            margin-inline-end: 16px;
+        }
+
+        ion-label {
+            .item-heading {
+                font-weight: 600;
+                font-size: 16px;
+                color: #1a1a1a;
+            }
+        }
+    }
+
+    // Menu items
+    ion-item.core-user-menu-handler,
+    ion-item.core-user-account-menu-handler,
+    ion-item.core-user-menu-preferences,
+    ion-item.core-user-menu-support {
+        --background: white;
+        --min-height: 56px;
+        --padding-start: 16px;
+        --padding-end: 16px;
+        --border-width: 0;
+        margin-bottom: 8px;
+        border-radius: 16px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            --background: #fafbfc;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            transform: translateY(-1px);
+            z-index: 2;
+        }
+
+        ion-icon[slot="start"] {
+            margin-inline-end: 16px;
+            color: #6b7280; // Neutral gray icon
+            font-size: 20px;
+            background: #f3f4f6;
+            width: 36px;
+            height: 36px;
+            padding: 8px;
+            border-radius: 10px;
+        }
+
+        ion-label {
+            margin: 0;
+
+            .item-heading {
+                font-weight: 500;
+                font-size: 15px;
+                color: #374151;
+            }
+        }
+
+        ion-icon[slot="end"] {
+            font-size: 16px;
+            color: #9ca3af;
+        }
+    }
+
+    // Specific icon colors
+    ion-item.core-user-menu-preferences ion-icon[slot="start"] {
+        color: #d97706; // Amber
+        background: #fef3c7;
+    }
+
+    ion-item.core-user-menu-support ion-icon[slot="start"] {
+        color: #059669; // Green
+        background: #d1fae5;
+    }
+
+    // Footer section
+    ion-footer {
+        background: transparent;
+        padding: 16px;
+
+        // Switch account
+        ion-item {
+            --background: white;
+            border-radius: 16px;
+            margin-bottom: 12px;
+            --border-width: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+
+            ion-icon[slot="start"] {
+                color: #2b6ffe;
+            }
+        }
+
+        // Logout button
+        ion-button {
+            --background: #fee2e2; // Light red
+            --background-hover: #fecaca;
+            --color: #ef4444; // Red text
+            --border-radius: 16px;
+            --box-shadow: none;
+            height: 52px;
+            font-weight: 600;
+            margin: 0;
+
+            ion-icon {
+                color: #ef4444;
+            }
+        }
+    }
+
+    // Loading
+    core-loading {
+        background: transparent;
+    }
 }
 
+// Ensure overrides work
+:host-context(.dark) {
+    ion-content {
+         --background: #f5f7fa !important;
+    }
+}
+
+// Responsive
+@media (min-width: 768px) {
+    ion-list {
+        padding: 24px;
+    }
+}
+
+// Hide elements based on config
 @if ($core-user-hide-siteinfo) {
     .core-usermenu-siteinfo {
         display: none;
     }
-}
-
-core-site-logo {
-    --core-site-logo-margin: 0px auto 8px auto;
-    --core-site-logo-max-height: var(--core-user-menu-site-logo-max-height);
-
-    --core-site-logo-sitename-font: var(--mdl-typography-subtitle-font-lg);
-    --core-site-logo-sitename-margin-bottom: 2px;
 }
 
 @if ($core-user-hide-sitename) {
@@ -40,8 +239,4 @@ core-site-logo {
     .core-usermenu-siteurl {
         display: none;
     }
-}
-
-ion-footer {
-    background: var(--contrast-background);
 }

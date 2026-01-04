@@ -14,7 +14,7 @@
 
 import { CoreConstants } from '@/core/constants';
 import { CoreSharedModule } from '@/core/shared.module';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CoreSiteInfo } from '@classes/sites/unauthenticated-site';
 import { CoreFilter } from '@features/filter/services/filter';
 import { CoreUserAuthenticatedSupportConfig } from '@features/user/classes/support/authenticated-support-config';
@@ -36,7 +36,7 @@ import { CoreSiteLogoComponent } from '@/core/components/site-logo/site-logo';
 import { CoreAlerts } from '@services/overlays/alerts';
 
 /**
- * Component to display a user menu.
+ * Component to display a modern, beautiful user menu with enhanced animations.
  */
 @Component({
     selector: 'core-main-menu-user-menu',
@@ -49,6 +49,8 @@ import { CoreAlerts } from '@services/overlays/alerts';
 })
 export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
 
+    @ViewChild('contentElement', { read: ElementRef }) contentElement?: ElementRef;
+
     siteInfo?: CoreSiteInfo;
     siteUrl?: string;
     displaySiteUrl = false;
@@ -59,6 +61,10 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
     displaySwitchAccount = true;
     displayContactSupport = false;
     removeAccountOnLogout = false;
+
+    // Animation states
+    isAnimating = false;
+    fadeInItems = false;
 
     protected siteId?: string;
     protected siteName?: string;
@@ -81,6 +87,11 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
         if (!this.siteInfo) {
             return;
         }
+
+        // Trigger fade-in animation after short delay
+        setTimeout(() => {
+            this.fadeInItems = true;
+        }, 100);
 
         // Load the handlers.
         try {
@@ -123,15 +134,16 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Opens User profile page.
+     * Opens User profile page with smooth transition.
      *
      * @param event Click event.
      */
     async openUserProfile(event: Event): Promise<void> {
-        if (!this.siteInfo) {
+        if (!this.siteInfo || this.isAnimating) {
             return;
         }
 
+        await this.animateItemClick(event);
         await this.close(event);
 
         CoreNavigator.navigateToSitePath('user/about', {
@@ -142,48 +154,63 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Opens preferences.
+     * Opens preferences with smooth transition.
      *
      * @param event Click event.
      */
     async openPreferences(event: Event): Promise<void> {
+        if (this.isAnimating) {
+            return;
+        }
+
+        await this.animateItemClick(event);
         await this.close(event);
 
         CoreNavigator.navigateToSitePath('preferences');
     }
 
     /**
-     * A handler was clicked.
+     * A handler was clicked with animation.
      *
      * @param event Click event.
      * @param handler Handler that was clicked.
      */
     async handlerClicked(event: Event, handler: CoreUserProfileHandlerData): Promise<void> {
-        if (!this.user) {
+        if (!this.user || this.isAnimating) {
             return;
         }
 
+        await this.animateItemClick(event);
         await this.close(event);
 
         handler.action(event, this.user, CoreUserDelegateContext.USER_MENU);
     }
 
     /**
-     * Contact site support.
+     * Contact site support with animation.
      *
      * @param event Click event.
      */
     async contactSupport(event: Event): Promise<void> {
+        if (this.isAnimating) {
+            return;
+        }
+
+        await this.animateItemClick(event);
         await this.close(event);
         await CoreUserSupport.contact();
     }
 
     /**
-     * Logout the user.
+     * Logout the user with confirmation and animation.
      *
      * @param event Click event
      */
     async logout(event: Event): Promise<void> {
+        if (this.isAnimating) {
+            return;
+        }
+
         if (this.removeAccountOnLogout) {
             // Ask confirm.
             const siteName = this.siteName ?
@@ -198,6 +225,7 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
             }
         }
 
+        await this.animateItemClick(event);
         await this.close(event);
 
         await CoreSites.logout({
@@ -207,15 +235,21 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Show account selector.
+     * Show account selector with animation.
      *
      * @param event Click event
      */
     async switchAccounts(event: Event): Promise<void> {
+        if (this.isAnimating) {
+            return;
+        }
+
         const thisModal = await ModalController.getTop();
 
         event.preventDefault();
         event.stopPropagation();
+
+        await this.animateItemClick(event);
 
         const { CoreLoginSitesModalComponent } = await import('@features/login/components/sites-modal/sites-modal');
 
@@ -230,22 +264,72 @@ export class CoreMainMenuUserMenuComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Add account.
+     * Add account with animation.
      *
      * @param event Click event
      */
     async addAccount(event: Event): Promise<void> {
+        if (this.isAnimating) {
+            return;
+        }
+
+        await this.animateItemClick(event);
         await this.close(event);
 
         await CoreLoginHelper.goToAddSite(true, true);
     }
 
     /**
-     * Close modal.
+     * Animate item click for visual feedback.
+     *
+     * @param event Click event.
+     */
+    protected async animateItemClick(event: Event): Promise<void> {
+        this.isAnimating = true;
+
+        const target = event.target as HTMLElement;
+        const item = target.closest('ion-item');
+
+        if (item) {
+            // Add scale animation
+            item.style.transition = 'transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
+            item.style.transform = 'scale(0.97)';
+
+            await new Promise(resolve => setTimeout(resolve, 150));
+
+            item.style.transform = 'scale(1)';
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+
+        this.isAnimating = false;
+    }
+
+    /**
+     * Add haptic feedback for button presses (if available).
+     */
+    protected triggerHapticFeedback(): void {
+        if ('vibrate' in navigator) {
+            navigator.vibrate(10);
+        }
+    }
+
+    /**
+     * Close modal with smooth fade-out animation.
      */
     async close(event: Event): Promise<void> {
         event.preventDefault();
         event.stopPropagation();
+
+        // Trigger haptic feedback
+        this.triggerHapticFeedback();
+
+        // Add fade-out animation
+        if (this.contentElement) {
+            const element = this.contentElement.nativeElement;
+            element.style.transition = 'opacity 0.2s ease-out';
+            element.style.opacity = '0';
+            await new Promise(resolve => setTimeout(resolve, 200));
+        }
 
         await ModalController.dismiss();
     }
