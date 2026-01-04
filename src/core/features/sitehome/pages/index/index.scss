@@ -1,171 +1,283 @@
-@use "theme/helpers/helpers" as *;
+@use "theme/globals" as *;
 
 :host {
     display: block;
+    background: #f5f7fa; // Light gray background
+
+    // Ensure content within also respects the theme
+    ion-content {
+        --background: #f5f7fa;
+    }
 }
 
-// Hero Section
+// Hero Section - Premium Modern Look
 .eduvestra-hero {
-    background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 100%);
+    background: linear-gradient(120deg, #4facfe 0%, #00f2fe 100%); // Brighter, more vibrant blue gradient
     color: white;
-    padding: 40px 24px 60px; // Extra bottom padding for overlap
-    margin-bottom: -30px; // Pull content up
+    padding: 60px 24px 80px; // Increased padding for grandeur
+    margin-bottom: -40px; // Pull content up more
     text-align: center;
-    border-bottom-left-radius: 40px;
-    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 48px;
+    border-bottom-right-radius: 48px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3); // Glow effect
+
+    // Abstract Background Shapes (Pseudo-elements)
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: 0;
+    }
+
+    &::before {
+        width: 300px;
+        height: 300px;
+        top: -100px;
+        left: -50px;
+    }
+
+    &::after {
+        width: 200px;
+        height: 200px;
+        bottom: -50px;
+        right: -20px;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
 
     h1 {
-        font-size: 2.2rem;
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 2.5rem;
         font-weight: 800;
         margin: 0;
-        letter-spacing: -0.03em;
+        letter-spacing: -1px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+
     h2 {
-        font-size: 1.2rem;
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 1.1rem;
         font-weight: 600;
-        margin: 5px 0 15px;
-        opacity: 0.9;
+        margin: 8px 0 20px;
+        opacity: 0.95;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 1px;
     }
+
     p {
-        font-size: 0.95rem;
-        opacity: 0.8;
-        margin-bottom: 25px;
+        font-size: 1rem;
+        opacity: 0.9;
+        margin-bottom: 30px;
+        line-height: 1.5;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero-actions {
         ion-button {
-            --border-radius: 50px;
-            --color: var(--ion-color-primary-shade);
+            --border-radius: 28px;
+            --background: white;
+            --color: #2b6ffe; // Brand blue text
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             font-weight: 700;
+            font-size: 16px;
+            height: 48px;
+            --padding-start: 32px;
+            --padding-end: 32px;
+            text-transform: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            }
         }
     }
 }
 
 .home-content-container {
-    padding: 20px 16px;
+    padding: 0 20px 30px;
+    position: relative;
+    z-index: 2;
 }
 
 // Grid Layout for Quick Access Items
 .quick-access-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); // Slightly wider minimum
+    gap: 20px; // Larger gap
     margin-top: 10px;
 }
 
 // Full width items like News
 .full-width-item {
     grid-column: 1 / -1;
-    margin-top: 20px;
+    margin-top: 32px;
 
     .section-title {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 15px;
+        color: #1a1a1a;
+        margin-bottom: 20px;
         padding-left: 8px;
+        border-left: 4px solid #2b6ffe; // Accent line
+        padding-left: 12px;
     }
 }
 
 // Dashboard Cards (Colorful Tiles)
 .dashboard-card {
-    margin: 0; // Reset margin due to grid
+    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     height: 100%;
-    min-height: 160px;
+    min-height: 180px; // Taller cards
     position: relative;
     overflow: hidden;
+    border-radius: 24px !important; // More rounded
     border: none !important;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease; // Bouncy transition
+
+    &:hover {
+        transform: translateY(-5px) scale(1.02);
+        z-index: 5;
+    }
 
     .card-icon-wrapper {
-        background: rgba(255, 255, 255, 0.2);
-        width: 60px;
-        height: 60px;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(4px);
+        width: 72px; // Larger icon circle
+        height: 72px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 12px;
-        margin-top: 20px;
+        margin-bottom: 16px;
+        margin-top: 24px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 
         ion-icon {
-            font-size: 28px;
+            font-size: 32px;
             color: white;
         }
     }
 
     ion-card-header {
-        padding: 0 16px 20px;
+        padding: 0 20px 24px;
 
         ion-card-title {
             color: white !important;
-            font-size: 1.1rem !important;
-            margin-bottom: 4px;
+            font-size: 1.2rem !important;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
         ion-card-subtitle {
-            color: rgba(255, 255, 255, 0.8) !important;
-            font-size: 0.75rem !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 0.85rem !important;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
     }
 
-    // Color Variants
+    // Color Variants with refined gradients and shadows
     &.card-blue {
         background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        box-shadow: 0 10px 20px -5px rgba(79, 172, 254, 0.4);
+        box-shadow: 0 12px 24px -6px rgba(79, 172, 254, 0.5);
     }
     &.card-purple {
         background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-        box-shadow: 0 10px 20px -5px rgba(161, 140, 209, 0.4);
+        box-shadow: 0 12px 24px -6px rgba(161, 140, 209, 0.5);
     }
     &.card-teal {
         background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        box-shadow: 0 10px 20px -5px rgba(67, 233, 123, 0.4);
+        box-shadow: 0 12px 24px -6px rgba(67, 233, 123, 0.5);
     }
     &.card-orange {
          background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-         box-shadow: 0 10px 20px -5px rgba(250, 112, 154, 0.4);
+         box-shadow: 0 12px 24px -6px rgba(250, 112, 154, 0.5);
     }
 }
 
-// Module List Styles
+// Module List Styles (Accordion-like sections)
 section.core-course-module-list-wrapper {
     border: none;
     background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     margin: 0 0 24px 0;
     overflow: hidden;
-    padding-bottom: 10px;
+    padding-bottom: 16px;
 
     ion-item-divider {
-        --background: transparent;
-        border-bottom: 1px solid var(--gray-200);
-        margin-bottom: 10px;
+        --background: #fafbfc;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 12px;
+        padding-top: 8px;
+        padding-bottom: 8px;
 
         ion-label {
              h2 {
-                 color: var(--ion-color-primary);
+                 color: #1a1a1a;
                  font-weight: 700;
+                 font-size: 1.1rem;
              }
         }
     }
 }
 
-// Icon styling
+// Icon styling within lists
 ion-item ion-icon {
-    display: inline-block;
-    border-radius: var(--mdl-shape-borderRadius-xs);
-    padding: 4px;
-    color: var(--text-color);
-    line-height: var(--size);
-    --margin-end: 8px;
-    @include margin-horizontal(null, var(--margin-end));
+    border-radius: 8px;
+    padding: 6px;
+    color: #2b6ffe;
+    background: rgba(43, 111, 254, 0.1); // Light blue background for icons
+    margin-right: 16px;
+}
+
+// Dark Mode Support
+:host-context(.dark) {
+    background: #1a1a1a;
+
+    ion-content {
+        --background: #1a1a1a;
+    }
+
+    .eduvestra-hero {
+        background: linear-gradient(120deg, #1a202c 0%, #2d3748 100%); // Darker gradient
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+        .hero-actions ion-button {
+             --background: #4facfe;
+             --color: white;
+        }
+    }
+
+    .full-width-item .section-title {
+        color: white;
+    }
+
+    section.core-course-module-list-wrapper {
+        background: #2a2a2a;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+
+        ion-item-divider {
+             --background: #333;
+             border-bottom-color: #444;
+
+             ion-label h2 {
+                 color: white;
+             }
+        }
+    }
 }

@@ -1,58 +1,179 @@
 @use "theme/globals" as *;
 
-ion-item.addon-notification-item {
+:host {
+    display: block;
+    background: #f5f7fa;
 
-    ion-label {
-        margin-top: 8px;
-        margin-bottom: 8px;
-        p {
-            font: var(--mdl-typography-body-font-sm);
-            &.item-heading {
-                font-size: var(--text-size);
-                @include ellipsis(3);
-            }
-        }
-    }
-
-    ion-note {
-        margin: 0;
-        @include padding-horizontal(8px, 0);
-        padding-top: 12px;
-
-        ion-icon {
-            font-size: #{dynamic-font(6px)};
-            vertical-align: middle;
-        }
-    }
-
-    [slot=start] {
-        align-self: start;
-        margin-top: 16px;
+    ion-content {
+        --background: #f5f7fa;
     }
 }
 
+// Main list formatting
+ion-item.addon-notification-item {
+    --background: white;
+    --border-width: 0;
+    --border-radius: 16px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    --inner-padding-end: 0;
+    margin: 0 16px 12px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:first-of-type {
+        margin-top: 16px;
+    }
+
+    &:hover {
+        --background: #fafbfc;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transform: translateY(-2px);
+        z-index: 10;
+    }
+
+    ion-label {
+        margin: 0;
+
+        p {
+            font: var(--mdl-typography-body-font-sm);
+
+            &.item-heading {
+                font-size: 15px; // Slightly larger title
+                font-weight: 600;
+                color: #1a1a1a;
+                margin-bottom: 6px;
+                line-height: 1.4;
+                @include ellipsis(3);
+            }
+        }
+
+        // Timestamp styling
+        p:not(.item-heading) {
+            font-size: 13px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+    }
+
+    // Avatar / Icon container
+    [slot=start] {
+        align-self: start;
+        margin-top: 4px; // Align better with title
+        margin-inline-end: 16px;
+
+        &.core-notification-icon {
+            background: #eef2ff; // Light blue bg
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            ion-icon {
+                color: #2b6ffe; // Brand blue
+                font-size: 24px;
+            }
+
+            img {
+                border-radius: 12px;
+            }
+        }
+
+        // If it's a user avatar component
+        core-user-avatar {
+             --core-avatar-size: 48px;
+             --core-avatar-border-radius: 12px;
+        }
+    }
+
+    // Unread indicator
+    ion-note {
+        margin: 0;
+        padding: 0;
+        align-self: center;
+        margin-left: 8px;
+
+        ion-icon {
+            font-size: 10px; // Larger dot
+            color: #2b6ffe; // Brand blue
+            filter: drop-shadow(0 0 2px rgba(43, 111, 254, 0.4));
+        }
+    }
+}
+
+// "Mark all as read" Button Container
 .mark-all-as-read {
-    padding-bottom: 16px;
+    padding-bottom: 24px;
     bottom: 0;
     left: 0;
     right: 0;
     display: flex;
-    background: transparent;
-    box-shadow: none;
-    pointer-events: none;
+    justify-content: center;
+    background: linear-gradient(to top, rgba(245,247,250, 1) 0%, rgba(245,247,250, 0) 100%); // Fade out effect
+    pointer-events: none; // Let clicks pass through transparent parts
 
     ion-chip.ion-color {
+        pointer-events: auto;
         margin: 0 auto;
+        height: 44px;
+        border-radius: 22px;
+        background: #2b6ffe !important; // Brand blue solid
+        color: white;
+        font-weight: 600;
+        padding-inline: 20px;
+        box-shadow: 0 4px 12px rgba(43, 111, 254, 0.4);
+        transition: transform 0.2s ease;
+
+        &:active {
+            transform: scale(0.96);
+        }
+
+        ion-icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
 
         ion-spinner {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
+            color: white;
             @include margin-horizontal(0, 8px);
         }
     }
 }
 
-
 ion-content::part(scroll) {
-    padding-bottom: 44px;
+    padding-bottom: 80px; // Make space for the floating button
+}
+
+// Dark Mode
+:host-context(.dark) {
+    background: #1a1a1a;
+    ion-content { --background: #1a1a1a; }
+
+    ion-item.addon-notification-item {
+        --background: #2a2a2a;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+        &:hover {
+            --background: #333;
+        }
+
+        ion-label p.item-heading {
+            color: #e5e7eb;
+        }
+
+        [slot=start].core-notification-icon {
+            background: rgba(43, 111, 254, 0.15);
+            ion-icon { color: #60a5fa; }
+        }
+    }
+
+    .mark-all-as-read {
+        background: linear-gradient(to top, rgba(26,26,26, 1) 0%, rgba(26,26,26, 0) 100%);
+    }
 }

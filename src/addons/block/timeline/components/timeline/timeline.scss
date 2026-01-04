@@ -1,38 +1,152 @@
 :host {
+    display: block;
+    background: #f5f7fa; // Light gray background for the whole block area
+
+    // Filter Row Container
     ion-row.addon-block-timeline-filter {
-        margin: 8px;
+        margin: 16px 16px 8px 16px;
         padding: 0;
+        gap: 12px;
+        display: flex;
+        flex-wrap: wrap; // Allow wrapping on small screens
 
         ion-col {
             padding: 0;
-            margin-right: 2px;
-            margin-left: 2px;
+            margin: 0;
+            flex: 1 1 auto; // Flexible width
         }
 
-        ion-button,
-        core-combobox ::ng-deep ion-button {
-            --border-width: 0;
-            --a11y-sizing-minTargetSize: 40px;
-            margin: 0;
+        // Search Box Modernization
+        core-search-box {
+            --background: white;
+            --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --border-radius: 12px;
+            --placeholder-color: #9ca3af;
+            --icon-color: #6b7280;
+            padding: 4px;
 
-            .select-icon {
-                display: none;
+            ::ng-deep ion-searchbar {
+                --background: transparent;
+                padding-top: 0;
+                padding-bottom: 0;
+                height: 44px;
+
+                .searchbar-input-container {
+                     input {
+                        font-size: 15px;
+                     }
+                }
             }
+        }
+
+        // Filter Dropdowns (Combobox)
+        core-combobox {
+            display: block;
+
+            ::ng-deep {
+                ion-item {
+                    --background: white;
+                    --border-radius: 12px;
+                    --min-height: 44px;
+                    --padding-start: 12px;
+                    --inner-padding-end: 0;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+                    border: 1px solid transparent;
+                    transition: all 0.2s ease;
+
+                    &:hover {
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                        transform: translateY(-1px);
+                    }
+                }
+
+                ion-label {
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #4b5563;
+                }
+
+                ion-select {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #1f2937;
+                    padding-left: 0;
+
+                    &::part(icon) {
+                        color: #6b7280;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    // Modernize the events list container (timeline-events component usually renders here)
+    // We can target the component selector if it's used inside
+    addon-block-timeline-events {
+        display: block;
+        padding: 0 16px 16px 16px;
+    }
+
+    // Empty State Modernization
+    core-empty-box {
+        margin: 32px 16px;
+        text-align: center;
+
+        ::ng-deep {
             ion-icon {
-                font-size: var(--mdl-typography-icon-fontSize-md);
+                font-size: 64px;
+                color: #d1d5db;
+                margin-bottom: 16px;
+                background: white;
+                padding: 20px;
+                border-radius: 50%;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            }
+
+            .core-empty-box-message {
+                font-size: 16px;
+                font-weight: 500;
+                color: #6b7280;
+            }
+        }
+    }
+}
+
+// Dark Mode Support
+:host-context(.dark) {
+    background: #1a1a1a !important; // Dark background
+
+    ion-row.addon-block-timeline-filter {
+        core-search-box {
+             --background: #2a2a2a;
+             --placeholder-color: #9ca3af;
+             --icon-color: #9ca3af;
+             --box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        core-combobox ::ng-deep ion-item {
+            --background: #2a2a2a;
+            --color: #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+            &:hover {
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             }
         }
 
         core-combobox ::ng-deep ion-select {
-            margin: 0;
-            --a11y-sizing-minTargetSize: 40px;
-        }
+             color: #f3f4f6;
 
-       core-search-box {
-            padding: 0;
-            margin: 0;
-            --height: 40px;
+             &::part(icon) {
+                 color: #9ca3af;
+             }
         }
     }
 
+    core-empty-box ::ng-deep ion-icon {
+        background: #2a2a2a;
+        color: #4b5563;
+        box-shadow: none;
+    }
 }

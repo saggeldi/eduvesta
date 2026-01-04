@@ -283,7 +283,36 @@
             }
         }
     }
+
+    // Modern Segment (Top Tabs)
+    ion-segment {
+        --background: rgba(0,0,0,0.04);
+        border-radius: 12px;
+        padding: 4px;
+        margin: 16px;
+        height: 44px;
+
+        ion-segment-button {
+            --color: var(--text-secondary);
+            --color-checked: var(--ion-color-primary);
+            --background-checked: white;
+            --indicator-color: transparent;
+            --indicator-box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: none;
+            letter-spacing: 0;
+            border-radius: 8px;
+            margin: 0;
+
+            &::part(indicator-background) {
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            }
+        }
+    }
 }
+
 
 /*
  * Dark Theme

@@ -64,7 +64,7 @@ const enum AddonMessagesGroupConversationOptionNames {
 @Component({
     selector: 'page-addon-messages-group-conversations',
     templateUrl: 'group-conversations.html',
-    styleUrl: '../../messages-common.scss',
+    styleUrls: ['../../messages-common.scss', 'group-conversations.scss'],
     imports: [
         CoreSharedModule,
         CoreMainMenuUserButtonComponent,

@@ -1,0 +1,202 @@
+@use "theme/globals" as *;
+
+:host {
+    display: block;
+    background: #f5f7fa;
+
+    ion-content {
+        --background: #f5f7fa;
+    }
+}
+
+ion-list {
+    background: transparent !important;
+    padding-top: 16px;
+    padding-bottom: 32px;
+}
+
+// "Contacts" Button - Styled as a Premium Card
+ion-item.ion-text-wrap[detail="true"]:not(.addon-message-discussion) {
+    --background: white;
+    --border-radius: 16px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 4px;
+    --padding-bottom: 4px;
+    --border-width: 0;
+    --inner-padding-end: 0;
+    margin: 0 16px 16px 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+    ion-icon[slot="start"] {
+        color: #2b6ffe; // Brand blue
+        font-size: 24px;
+        background: rgba(43, 111, 254, 0.1);
+        padding: 10px;
+        border-radius: 12px;
+        margin-right: 16px;
+    }
+
+    ion-label {
+        font-weight: 700;
+        font-size: 16px !important;
+        color: #1a1a1a;
+    }
+
+    ion-badge {
+        --background: #ff6b6b; // Red badge for requests
+        --color: white;
+        border-radius: 6px;
+    }
+}
+
+// Accordion Styles
+ion-accordion-group {
+    margin: 0 16px;
+
+    ion-accordion {
+        background: white;
+        border-radius: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        overflow: hidden;
+
+        // Accordion Header
+        ion-item[slot="header"] {
+            --background: white;
+            --border-width: 0;
+            --padding-start: 16px;
+            --padding-end: 16px;
+            --inner-padding-end: 0;
+            font-weight: 600;
+
+            ion-label h2 {
+                font-size: 15px;
+                font-weight: 700;
+                color: #2b6ffe; // Brand color for section titles
+            }
+
+            ion-badge {
+                --background: #2b6ffe;
+                --color: white;
+                margin-inline-start: 8px;
+            }
+        }
+
+        // Accordion Content Container
+        div[slot="content"] {
+            background: #fafbfc; // Slightly different bg for inner list
+            padding-bottom: 8px;
+        }
+    }
+}
+
+// Conversation Items (Inside Accordion)
+ion-item.addon-message-discussion {
+    --background: transparent;
+    --border-width: 0;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --inner-padding-end: 0;
+    margin-bottom: 4px;
+
+    // Remove border/lines
+    --min-height: 70px;
+
+    // Avatar
+    ion-avatar, core-user-avatar {
+        width: 48px;
+        height: 48px;
+        margin-inline-end: 16px;
+        --border-radius: 12px; // Rounded rect avatar
+    }
+
+    ion-label {
+        margin: 0;
+
+        // Name
+        .item-heading {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        // Message Preview
+        p:not(.item-heading) {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        // Last Message & User
+        .addon-message-last-message {
+            color: #9ca3af;
+        }
+
+        .addon-message-last-message-user {
+             font-weight: 500;
+             color: #4b5563;
+        }
+    }
+
+    // Time & Unread Badge
+    ion-note {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .addon-message-last-message-date {
+            font-size: 11px;
+            color: #9ca3af;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        ion-badge {
+            --background: #2b6ffe;
+            --padding-start: 6px;
+            --padding-end: 6px;
+            border-radius: 6px;
+            font-size: 11px;
+        }
+    }
+}
+
+// Dark Mode Support
+:host-context(.dark) {
+    background: #1a1a1a;
+    ion-content { --background: #1a1a1a; }
+
+    ion-item.ion-text-wrap[detail="true"]:not(.addon-message-discussion) {
+        --background: #2a2a2a;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+        ion-label { color: white; }
+        ion-icon[slot="start"] {
+            background: rgba(43, 111, 254, 0.2);
+            color: #60a5fa;
+        }
+    }
+
+    ion-accordion-group ion-accordion {
+        background: #2a2a2a;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+        ion-item[slot="header"] {
+             --background: #2a2a2a;
+             ion-label h2 { color: #60a5fa; }
+        }
+
+        div[slot="content"] {
+            background: #252525;
+        }
+    }
+
+    ion-item.addon-message-discussion {
+        ion-label .item-heading { color: #e5e7eb; }
+        ion-label p:not(.item-heading) { color: #9ca3af; }
+    }
+}
