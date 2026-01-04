@@ -54,11 +54,13 @@ export class CoreSettingsSectionsSource extends CoreRoutedItemsManagerSource<Cor
             });
         }
 
+        /*
         sections.push({
             name: 'core.settings.about',
             path: 'about',
             icon: 'fas-id-card',
         });
+        */
 
         return { items: sections };
     }

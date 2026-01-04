@@ -23,7 +23,7 @@ $grid-column-paddings: (
     padding: 16px;
 
     ::ng-deep {
-        @import "theme/components/bootstrap/bootstrap";
+         @import "theme/components/bootstrap/bootstrap";
 
         table {
             display: block;

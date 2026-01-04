@@ -1,0 +1,247 @@
+@use "theme/globals" as *;
+
+:host {
+    display: block;
+    height: 100%;
+    font-family: 'Geist', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    ion-content {
+        --background: linear-gradient(165deg, #f8f9fc 0%, #f0f2f7 100%);
+    }
+
+    core-split-view {
+        ion-list {
+            background: transparent !important;
+            padding: 60px 16px 24px 16px; /* Increased top padding */
+            max-width: 640px;
+            margin: 0 auto;
+
+            ion-item {
+                --background: linear-gradient(135deg, #ffffff 0%, #fdfdfe 100%);
+                --border-color: transparent;
+                --border-radius: 16px;
+                --min-height: 52px; /* Decreased height */
+                --padding-start: 16px;
+                --inner-padding-end: 16px;
+                margin-bottom: 8px; /* Slightly reduced margin */
+                box-shadow:
+                    0 2px 8px rgba(15, 23, 42, 0.04),
+                    0 1px 3px rgba(15, 23, 42, 0.06);
+                border: 1.5px solid rgba(255, 255, 255, 0.8);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+                animation: slideInUp 0.5s ease backwards;
+
+                &:nth-child(1) { animation-delay: 0.05s; }
+                &:nth-child(2) { animation-delay: 0.1s; }
+                &:nth-child(3) { animation-delay: 0.15s; }
+                &:nth-child(4) { animation-delay: 0.2s; }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(135deg,
+                        rgba(99, 102, 241, 0.03) 0%,
+                        rgba(168, 85, 247, 0.02) 100%);
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    pointer-events: none;
+                }
+
+                /* Icon styling with gradient backgrounds */
+                ion-icon[slot="start"] {
+                    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+                    color: #ffffff;
+                    padding: 7px; /* Reduced padding */
+                    border-radius: 10px; /* Slightly smaller radius */
+                    font-size: 18px; /* Slightly smaller icon */
+                    margin-right: 14px;
+                    width: 34px; /* Decreased size */
+                    height: 34px; /* Decreased size */
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow:
+                        0 4px 12px rgba(99, 102, 241, 0.25),
+                        0 2px 6px rgba(99, 102, 241, 0.15);
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                /* Different gradient for each item */
+                &:nth-child(1) ion-icon[slot="start"] {
+                    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+                }
+
+                &:nth-child(2) ion-icon[slot="start"] {
+                    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+                    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+                }
+
+                &:nth-child(3) ion-icon[slot="start"] {
+                    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+                    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+                }
+
+                &:nth-child(4) ion-icon[slot="start"] {
+                    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+                }
+
+                ion-label {
+                    margin: 0;
+
+                    .item-heading {
+                        font-family: 'Geist', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+                        font-weight: 600;
+                        font-size: 15px;
+                        color: #0f172a;
+                        margin: 0;
+                        letter-spacing: -0.02em;
+                        transition: color 0.2s ease;
+                    }
+                }
+
+                /* Chevron/Detail icon */
+                &::part(detail-icon) {
+                    color: #94a3b8;
+                    opacity: 0.6;
+                    font-size: 20px;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                /* Hover/Active states with smooth transforms */
+                &.item-interactive.item-has-focus,
+                &:active,
+                &:hover {
+                    --background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+                    transform: translateY(-2px) scale(1.01);
+                    box-shadow:
+                        0 8px 24px rgba(15, 23, 42, 0.08),
+                        0 4px 12px rgba(99, 102, 241, 0.12),
+                        0 0 0 1px rgba(99, 102, 241, 0.1);
+                    border-color: rgba(99, 102, 241, 0.2);
+                    z-index: 10;
+
+                    &::before {
+                        opacity: 1;
+                    }
+
+                    ion-icon[slot="start"] {
+                        transform: scale(1.05) rotate(5deg);
+                        box-shadow:
+                            0 6px 16px rgba(99, 102, 241, 0.35),
+                            0 3px 8px rgba(99, 102, 241, 0.2);
+                    }
+
+                    ion-label .item-heading {
+                        color: #6366f1;
+                    }
+
+                    &::part(detail-icon) {
+                        color: #6366f1;
+                        opacity: 1;
+                        transform: translateX(3px);
+                    }
+                }
+
+                /* Active state */
+                &:active {
+                    transform: translateY(0) scale(0.99);
+                    transition-duration: 0.1s;
+                }
+            }
+        }
+    }
+}
+
+/* Slide in animation */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark mode with elegant styling */
+:host-context(:root.dark) {
+    ion-content {
+        --background: linear-gradient(165deg, #0a0b0f 0%, #151721 100%);
+    }
+
+    core-split-view ion-list ion-item {
+        --background: linear-gradient(135deg, #1a1b26 0%, #1e1f2e 100%);
+        box-shadow:
+            0 2px 8px rgba(0, 0, 0, 0.3),
+            0 1px 3px rgba(0, 0, 0, 0.4);
+        border: 1.5px solid rgba(255, 255, 255, 0.05);
+
+        &::before {
+            background: linear-gradient(135deg,
+                rgba(99, 102, 241, 0.08) 0%,
+                rgba(168, 85, 247, 0.06) 100%);
+        }
+
+        ion-label .item-heading {
+            color: #e2e8f0;
+        }
+
+        ion-icon[slot="start"] {
+            box-shadow:
+                0 4px 12px rgba(99, 102, 241, 0.4),
+                0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        &::part(detail-icon) {
+            color: #64748b;
+        }
+
+        &.item-interactive.item-has-focus,
+        &:active,
+        &:hover {
+            --background: linear-gradient(135deg, #1e1f2e 0%, #232438 100%);
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.4),
+                0 4px 12px rgba(99, 102, 241, 0.2),
+                0 0 0 1px rgba(99, 102, 241, 0.3);
+            border-color: rgba(99, 102, 241, 0.4);
+
+            ion-label .item-heading {
+                color: #a5b4fc;
+            }
+
+            &::part(detail-icon) {
+                color: #a5b4fc;
+            }
+        }
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    :host {
+        core-split-view ion-list {
+            padding: 40px 16px 20px 16px;
+
+            ion-item {
+                --min-height: 56px;
+                --border-radius: 14px;
+                margin-bottom: 9px;
+            }
+        }
+    }
+}
+
+/* Smooth scroll behavior */
+ion-content {
+    scroll-behavior: smooth;
+}

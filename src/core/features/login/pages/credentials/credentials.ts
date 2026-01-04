@@ -44,7 +44,7 @@ import { CoreLoadings } from '@services/overlays/loadings';
 import { CoreAlerts } from '@services/overlays/alerts';
 import { CoreLoginMethodsComponent } from '../../components/login-methods/login-methods';
 import { CoreLoginExceededAttemptsComponent } from '../../components/exceeded-attempts/exceeded-attempts';
-import { CoreSiteLogoComponent } from '../../../../components/site-logo/site-logo';
+// import { CoreSiteLogoComponent } from '../../../../components/site-logo/site-logo';
 import { CoreSharedModule } from '@/core/shared.module';
 
 /**
@@ -56,7 +56,7 @@ import { CoreSharedModule } from '@/core/shared.module';
     styleUrl: '../../login.scss',
     imports: [
         CoreSharedModule,
-        CoreSiteLogoComponent,
+        // CoreSiteLogoComponent,
         CoreLoginExceededAttemptsComponent,
         CoreLoginMethodsComponent,
     ],
