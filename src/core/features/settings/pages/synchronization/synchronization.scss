@@ -1,0 +1,147 @@
+@use "theme/globals" as *;
+
+:host {
+    display: block;
+    height: 100%;
+
+    ion-content {
+        --background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+        --keyboard-offset: 0 !important;
+    }
+}
+
+.core-settings-card {
+    background: #fff;
+    padding: 24px;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    margin-bottom: 24px;
+
+    .item-heading {
+        color: #1e293b;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        display: block;
+    }
+
+    ion-item {
+        --background: #fdfdfd;
+        --border-radius: 16px;
+        --padding-start: 16px;
+        --inner-padding-end: 16px;
+        --min-height: 56px;
+        --border-width: 0;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+
+        ion-label {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        ion-toggle {
+            --track-background: #cbd5e1;
+            --track-background-checked: #2B6FFE;
+            --handle-background: #ffffff;
+            --handle-box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        &.item-lines-none {
+            --border-width: 0;
+        }
+    }
+}
+
+// Warning Card for No Wifi/Offline
+.core-warning-card {
+    background-color: #FFF4E5 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    margin-bottom: 24px;
+    border: none;
+
+    ion-item {
+        --background: transparent;
+        --min-height: 60px;
+        box-shadow: none;
+
+        ion-icon {
+            color: var(--ion-color-warning);
+            font-size: 24px;
+            margin-right: 16px;
+        }
+
+        ion-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #663C00 !important;
+            white-space: normal;
+        }
+    }
+}
+
+// Sites List Styling
+core-sites-list {
+    ion-item {
+        --background: #fdfdfd;
+        --border-radius: 16px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+
+        &::part(native) {
+            padding-left: 0;
+        }
+    }
+
+    // Refresh Button
+    ion-button {
+        --color: #2B6FFE;
+
+        ion-icon {
+            font-size: 20px;
+        }
+    }
+}
+
+// Dark Mode Support
+:host-context(:root.dark) {
+    ion-content {
+        --background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .core-settings-card {
+        background: #1e293b;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+
+        .item-heading {
+            color: #f1f5f9;
+        }
+
+        ion-item {
+            --background: rgba(30, 41, 59, 0.5);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+            ion-label {
+                color: #f1f5f9;
+            }
+
+            ion-toggle {
+                --track-background: #475569;
+                --track-background-checked: #6366f1;
+            }
+        }
+    }
+
+    // Warning Card Dark Mode
+    .core-warning-card {
+         background-color: rgba(255, 152, 0, 0.15) !important;
+
+         ion-item {
+             ion-label {
+                 color: #ffb74d !important;
+             }
+         }
+    }
+}

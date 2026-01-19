@@ -1,5 +1,121 @@
-:host {
-    .core-settings-general-font-size ion-segment {
-        max-width: 250px;
+// Custom styling for General Settings page
+ion-content {
+    --background: #f2f4f8; // Light gray background for the whole page
+}
+
+.list-item-limited-width {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 16px;
+    background: transparent;
+
+    ion-item {
+        --background: transparent;
+        --padding-start: 0;
+        --inner-padding-end: 0;
     }
+}
+
+// Group settings into cards
+.settings-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 8px 0;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+
+    ion-item {
+        --background: #ffffff;
+        --border-color: #f0f0f0;
+        font-size: 16px;
+        font-weight: 500;
+        color: #1f2937;
+
+        &::part(native) {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        // Remove last border
+        &:last-child {
+            --border-width: 0;
+        }
+    }
+
+    .item-heading {
+        font-weight: 600;
+        color: #111827;
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+
+    p[slot="start"], p[slot="end"], .ion-text-wrap {
+        color: #6b7280;
+        font-size: 14px;
+    }
+}
+
+// Typography for Section Headers (if we add them)
+.section-header {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #9ca3af;
+    margin: 24px 16px 8px;
+}
+
+// Text Size Segment
+.text-size-container {
+    padding: 16px;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    margin: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-segment {
+        background: #e5e7eb;
+        border-radius: 8px;
+        padding: 4px;
+        height: 48px;
+
+        ion-segment-button {
+            --indicator-color: #ffffff;
+            --indicator-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --color: #6b7280;
+            --color-checked: #111827;
+            --border-radius: 6px;
+            font-weight: 700;
+            margin: 0 2px;
+            min-height: 40px;
+
+            // Approximate the A - A - A visual
+            // We can target specific children if needed, but the TS sets font-size style inline
+            ion-label {
+                margin: 0;
+            }
+        }
+    }
+}
+
+// Toggles
+ion-toggle {
+    --track-background: #e5e7eb;
+    --track-background-checked: #3b82f6; // Brand blue
+    --handle-background: #ffffff;
+    height: 24px;
+    width: 44px;
+    padding: 0;
+}
+
+// Selects
+ion-select {
+    width: 100%;
+    max-width: 100%;
+    --placeholder-color: #6b7280;
+    --placeholder-opacity: 1;
+    font-weight: 500;
 }

@@ -35,6 +35,7 @@ import { CoreError } from '@classes/errors/error';
 @Component({
     selector: 'page-core-login-forgotten-password',
     templateUrl: 'forgotten-password.html',
+    styleUrl: 'forgotten-password.scss',
     imports: [
         CoreSharedModule,
         CoreLoginExceededAttemptsComponent,
