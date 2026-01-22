@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:111111111111:android:1111111111111111",
         "android_client_info": {
-          "package_name": "com.eduvestra.eduvestramobile"
+          "package_name": "com.moodle.moodlemobile"
         }
       },
       "oauth_client": [
@@ -27,7 +27,6 @@
           "current_key": ""
         }
       ],
-      "client_id": "",
       "services": {
         "analytics_service": {
           "status": 1
