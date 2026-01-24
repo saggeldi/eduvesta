@@ -52,10 +52,10 @@
             text-align: center;
 
             core-site-logo {
-                /* EduVestra Logo Styles */
+                /* Moodle Logo Styles */
                 --core-site-logo-max-height: 140px;
                 --core-site-logo-sitename-margin-bottom: 16px;
-                /* EduVestra text styling - bold, modern font */
+                /* Moodle text styling - bold, modern font */
                 --core-site-logo-sitename-font: 700 42px/1.1 'Outfit', sans-serif;
                 --core-site-logo-sitename-color: #1e293b;
                 margin-bottom: 20px;
@@ -408,7 +408,7 @@
 
     .core-login-info-box .core-login-site {
         core-site-logo {
-            /* EduVestra text in dark mode */
+            /* Moodle text in dark mode */
             --core-site-logo-sitename-color: #f1f5f9;
         }
 

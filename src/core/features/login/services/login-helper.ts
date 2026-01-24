@@ -296,7 +296,7 @@ export class CoreLoginHelperProvider {
         // Always return the hardcoded eduvestra.com site
         return [{
             url: 'https://eduvestra.com',
-            name: 'Eduve',
+            name: 'Moodle',
             imageurl: '',
         }];
     }

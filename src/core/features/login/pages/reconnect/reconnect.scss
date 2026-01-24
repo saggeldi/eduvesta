@@ -1,11 +1,11 @@
 @use "theme/globals" as *;
 
-$eduvestra-blue: #2B6FFE;
-$eduvestra-bg: #f2f4f8;
+$moodlemobile-blue: #2B6FFE;
+$moodlemobile-bg: #f2f4f8;
 
 :host {
     ion-content {
-        --background: #{$eduvestra-bg};
+        --background: #{$moodlemobile-bg};
         --padding-top: 24px;
         --padding-bottom: 24px;
     }
@@ -119,7 +119,7 @@ $eduvestra-bg: #f2f4f8;
 
     // Login Button
     ion-button[type="submit"] {
-        --background: #{$eduvestra-blue};
+        --background: #{$moodlemobile-blue};
         --border-radius: 16px;
         --box-shadow: 0 4px 12px rgba(43, 111, 254, 0.3);
         height: 52px;
@@ -142,7 +142,7 @@ $eduvestra-bg: #f2f4f8;
         --padding-bottom: 8px;
 
         &:hover {
-            color: $eduvestra-blue;
+            color: $moodlemobile-blue;
         }
     }
 }

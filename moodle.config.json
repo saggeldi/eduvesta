@@ -87,11 +87,11 @@
         "medium": 110,
         "high": 120
     },
-    "customurlscheme": "eduvestra",
+    "customurlscheme": "moodlemobile",
     "sites": [
         {
             "url": "https://eduvestra.com",
-            "name": "Eduvestra",
+            "name": "Moodle",
             "imageurl": ""
         }
     ],
