@@ -102,30 +102,33 @@ ion-chip {
 // List layout.
 ion-card.core-course-list-item {
     max-width: var(--list-item-max-width);
-    margin: 8px 0;
-    border-radius: 14px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 12px 0;
+    border-radius: 20px;
+    background: var(--surface-primary);
+    box-shadow: var(--shadow-subtle);
+    border: 1px solid transparent; // Clean border
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow: hidden;
 
     &:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        transform: translateY(-2px);
-        border-color: rgba(43, 111, 254, 0.1);
+        box-shadow: var(--shadow-elevated);
+        transform: translateY(-3px) scale(1.01);
+        z-index: 10;
     }
 
     core-course-image {
-        --core-image-radius: var(--avatar-radius);
-        --core-image-size: var(--avatar-size);
-        @include margin(var(--avatar-margin), var(--avatar-margin), var(--avatar-margin), null);
+        --core-image-radius: 16px; // Matching inner radius
+        --core-image-size: 64px;
+        @include margin(16px, 16px, 16px, null);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08); // Shadow for the image itself
     }
 
     ion-item::part(native) {
-        --padding-start: var(--avatar-margin);
-        --padding-end: 16px;
-        --padding-top: 12px;
-        --padding-bottom: 12px;
+        --padding-start: 16px;
+        --padding-end: 24px;
+        --padding-top: 16px;
+        --padding-bottom: 16px;
+        --background: transparent;
     }
 
     .core-course-maininfo {
@@ -133,11 +136,26 @@ ion-card.core-course-list-item {
     }
 
     .item-heading {
-        font-size: 1.05rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--text-primary);
+        line-height: 1.35;
+        margin-bottom: 6px;
+    }
+
+    // Category chip improvements
+    ion-chip.core-course-category {
+        background: rgba(43, 111, 254, 0.06);
+        color: var(--accent-primary);
         font-weight: 600;
-        color: var(--text-primary, #1F2937);
-        line-height: 1.4;
-        margin-bottom: 4px;
+        font-size: 0.75rem;
+        border-radius: 8px;
+        height: 24px;
+
+        ion-label {
+            font-weight: 600;
+        }
     }
 
     @if ($core-course-hide-progress-on-list-items) {
@@ -154,67 +172,68 @@ ion-card.core-course-list-card {
         flex-direction: column;
         align-items: stretch;
         height: 100%;
+        background: var(--surface-primary);
     }
 
-    height: calc(100% - var(--card-vertical-margin) - var(--card-vertical-margin));
-    margin-top: var(--card-vertical-margin);
-    margin-bottom: var(--card-vertical-margin);
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    height: calc(100% - 24px); // Increased spacing
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-radius: 20px; // Larger radius
+    box-shadow: var(--shadow-subtle);
+    border: none;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow: hidden;
+    position: relative; // For pseudo-element positioning
 
+    // Premium hover lift
     &:hover {
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-        transform: translateY(-4px);
-        border-color: rgba(43, 111, 254, 0.15);
+         box-shadow: var(--shadow-elevated);
+         transform: translateY(-5px);
     }
 
     core-course-image {
-        --core-course-card-image-aspect-ratio: 5/2;
+        --core-course-card-image-aspect-ratio: 16/9; // Cinematic Aspect Ratio
         position: relative;
+        border-radius: 0; // Seamless image
+        margin: 0;
 
-        &::after {
+        // Gradient overlay for text readability if needed
+        &::before {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #2B6FFE, #54a0ff);
-            opacity: 0;
-            transition: opacity 0.25s ease;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.05), transparent);
+            pointer-events: none;
         }
     }
 
-    &:hover core-course-image::after {
-        opacity: 1;
-    }
-
     .core-course-shortname {
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         font-size: 0.75rem;
-        font-weight: 600;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--ion-color-primary, #2B6FFE);
+        letter-spacing: 0.08em;
+        color: var(--accent-primary);
+        opacity: 0.9;
     }
 
     ion-item {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
+        --background: transparent;
 
         &::part(native) {
             flex-grow: 1;
             align-items: self-start;
-            padding: 16px;
+            padding: 20px;
         }
 
         > ion-label{
             margin: 0;
-
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -223,32 +242,26 @@ ion-card.core-course-list-card {
 
             // Clamp one line with ellipsis on tablet view, and 2 in mobile.
             .item-heading {
-                @include ellipsis();
-                font-size: 1.1rem;
+                @include ellipsis(2);
+                font-size: 1.15rem; // Larger title
                 font-weight: 700;
-                color: var(--text-primary, #1F2937);
-                line-height: 1.4;
-                margin-bottom: 8px;
+                color: var(--text-primary);
+                line-height: 1.35;
+                margin-bottom: 12px;
                 letter-spacing: -0.01em;
-            }
-
-            @include media-breakpoint-down(md) {
-                .item-heading {
-                    // Addition lines for 2 line or multiline ellipsis
-                    @include ellipsis(2);
-                }
             }
 
             .core-course-maininfo {
                 flex-grow: 1;
                 max-width: 100%;
-                font-size: 0.9rem;
-                color: var(--text-secondary, #4B5563);
+                font-size: 0.95rem;
+                color: var(--text-secondary);
+                line-height: 1.5;
             }
 
             .core-course-progress {
                 align-self: stretch;
-                margin-top: 12px;
+                margin-top: 16px;
             }
         }
     }
